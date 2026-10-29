@@ -63,16 +63,19 @@ Topics, in order:
 3. **Stack.** Languages, frameworks, database, frontend or not, how it runs
    (container, binary, static site, script), package managers. Recommend one
    from the user story and say why. A non-code project (research, writing) has
-   no stack; skip topics 5 and the CI part of phase 3.
+   no stack; skip topic 6 and the CI part of phase 3.
 4. **Invariants.** Three to six rules that must never break, and which layer
    owns the rules (e.g. "the backend owns validation; the frontend shows its
-   results"). Ask whether the project:
-   - records outcomes, analyses trends, or proposes changes: then it follows
-     the adaptive loop (`learnings/adaptive-loop.md`);
-   - calls LLMs: then "code decides, models propose" is an invariant.
-5. **Commands.** The commands that prove a change works: format, lint, type
+   results"). Ask whether the project calls LLMs: then "code decides, models
+   propose" is an invariant.
+5. **Optional sections.** Offer each file in `bootstrap/templates/optional/`
+   with one line on what it is for, and let the owner choose. Default: none.
+   Today there is one: the **adaptive loop**, for projects that record
+   outcomes, analyse trends and propose changes from the user's own data
+   (`learnings/adaptive-loop.md`). Don't add it unless the owner says yes.
+6. **Commands.** The commands that prove a change works: format, lint, type
    check, test, build. Propose the standard ones for the stack.
-6. **GitHub.** Confirm: create the repository, labels, branch rules on `main`,
+7. **GitHub.** Confirm: create the repository, labels, branch rules on `main`,
    CI, and the first map issue. Anything the owner wants left out.
 
 Then show a numbered summary of every answer and ask: "Is this right?" Fix
@@ -81,7 +84,7 @@ until it is. These become the map's first dated decisions.
 ## Phase 3: Write the files
 
 Copy `bootstrap/templates/` into the project (including the hidden
-`.github/`). Fill every `{{…}}` and `<…>` placeholder, except in the files
+`.github/`), but not `optional/`. Fill every `{{…}}` and `<…>` placeholder, except in the files
 that stay templates: `.github/ISSUE_TEMPLATE/*`,
 `.github/pull_request_template.md` and `docs/adr/0000-template.md`. Delete
 sections that don't apply and the `Init:` comments; keep each file short.
@@ -91,7 +94,7 @@ Check that nothing is left:
 
 | File | From |
 |---|---|
-| `AGENTS.md` | Invariants, owning layer, commands, adaptive-loop and LLM sections only if they apply, links to relevant `learnings/` |
+| `AGENTS.md` | Invariants, owning layer, commands, the LLM invariant only if it applies, the optional sections the owner chose (from `optional/`), links to relevant `learnings/` |
 | `<area>/AGENTS.md` | `AGENTS.area.md`, only for areas with their own stack (e.g. `backend/`, `frontend/`) |
 | `CLAUDE.md` | As is (`@AGENTS.md`) |
 | `CODING_STANDARDS.md` | Owning layer, generated files, test rules |
@@ -115,7 +118,7 @@ third-party actions. `bootstrap/ci-examples/` shows the rules applied to
 Python and Node; use the same shape for any other stack. Add
 `.github/dependabot.yml` for GitHub Actions as `ci.md` describes.
 
-Run every command from topic 5 locally. Everything passes before phase 4.
+Run every command from topic 6 locally. Everything passes before phase 4.
 
 ## Phase 4: Confirm, then GitHub
 

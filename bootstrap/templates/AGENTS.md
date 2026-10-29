@@ -36,14 +36,8 @@ and the relevant ADRs.
   Models only propose, through the same validated actions as a person. Tests
   never need a live model.
 
-<!-- If the project records outcomes, analyses trends or proposes changes: -->
-## Adaptive loop
-
-This project follows
-[`{{PRINCIPLES}}` → `learnings/adaptive-loop.md`](https://github.com/{{PRINCIPLES}}/blob/main/learnings/adaptive-loop.md):
-decide → act → record → measure → learn → propose; the user decides. Fixed,
-tested rules are the baseline; a model must beat them before its proposals are
-trusted.
+<!-- Init: optional sections from bootstrap/templates/optional/ go here, only
+when the owner chose them in the interview. -->
 
 ## Commands
 

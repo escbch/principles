@@ -157,8 +157,7 @@ one needs the previous. State the merge order in each PR."
 
 ## LLMs propose; code decides
 
-For anything that works with the user's data, see
-[`../learnings/adaptive-loop.md`](../learnings/adaptive-loop.md). For every project:
+For every project that uses LLMs or models:
 
 - **Deterministic core.** Validation, calculations and safety rules are tested
   code. Models only propose or explain, through the same validated actions a
