@@ -30,3 +30,7 @@ your fork from the new project.
 
 [`bootstrap/WORKFLOW.md`](bootstrap/WORKFLOW.md): user story and map, decisions,
 work packages, implementation, review, and feeding learnings back here.
+
+## License
+
+[MIT](LICENSE): use, copy and adapt freely; keep the copyright notice.
