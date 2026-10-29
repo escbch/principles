@@ -1,0 +1,106 @@
+name: Backend CI
+
+# Runs only when backend code, the scripts its tests load, or this workflow
+# change; docs-only and frontend-only changes skip it (saves runner minutes).
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '!backend/**/*.md'
+      - 'scripts/**'
+      - '.github/workflows/backend-ci.yml'
+
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '!backend/**/*.md'
+      - 'scripts/**'
+      - '.github/workflows/backend-ci.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A newer push to the same branch cancels the older, now pointless run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Ruff runs in this job: a separate job is billed as at least one more minute.
+  tests:
+    name: Ruff and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ci_password
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      DATABASE_URL: postgresql+psycopg://app:ci_password@localhost:5432/app
+      TEST_DATABASE_URL: postgresql+psycopg://app:ci_password@localhost:5432/app_test
+
+    services:
+      postgres:
+        # Docker Hub's official image via Google's mirror: Docker Hub and the
+        # AWS public mirror both rate-limit anonymous pulls from shared runners.
+        image: mirror.gcr.io/library/postgres:18
+
+        env:
+          POSTGRES_DB: app
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: ci_password
+
+        ports:
+          - 5432:5432
+
+        options: >-
+          --health-cmd "pg_isready -U app -d app"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+
+      - name: Install Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Run Ruff
+        run: uv run ruff check .
+
+      - name: Create test database
+        # psql inside the service container: no client install on the runner.
+        run: >-
+          docker exec ${{ job.services.postgres.id }}
+          psql --username app --dbname postgres
+          --command "CREATE DATABASE app_test OWNER app;"
+
+      - name: Apply migrations and check model drift
+        run: |
+          uv run alembic upgrade head
+          uv run alembic check
+
+      - name: Run tests
+        run: uv run pytest

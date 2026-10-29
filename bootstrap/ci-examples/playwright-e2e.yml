@@ -1,0 +1,119 @@
+name: End-to-end
+
+# Runs only when app code or this workflow change; docs-only changes skip it.
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '!backend/**/*.md'
+      - 'frontend/**'
+      - '!frontend/**/*.md'
+      - 'scripts/e2e_database.py'
+      - '.nvmrc'
+      - '.github/workflows/e2e.yml'
+
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '!backend/**/*.md'
+      - 'frontend/**'
+      - '!frontend/**/*.md'
+      - 'scripts/e2e_database.py'
+      - '.nvmrc'
+      - '.github/workflows/e2e.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A newer push to the same branch cancels the older, now pointless run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    name: Playwright journey
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ci_password
+      E2E_DATABASE_URL: postgresql+psycopg://app:ci_password@localhost:5432/app_e2e
+      APPLICATION_DATABASE_URL: postgresql+psycopg://app:ci_password@localhost:5432/app
+
+    services:
+      postgres:
+        # Docker Hub's official image via Google's mirror.
+        image: mirror.gcr.io/library/postgres:18
+
+        env:
+          POSTGRES_DB: app
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: ci_password
+
+        ports:
+          - 5432:5432
+
+        options: >-
+          --health-cmd "pg_isready -U app -d app"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+
+      - name: Install Python
+        run: uv python install
+        working-directory: backend
+
+      - name: Install backend dependencies
+        run: uv sync --locked
+        working-directory: backend
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: frontend
+
+      - name: Install Playwright Chromium
+        # A headless run needs only the headless shell, and the runner image
+        # already has its system libraries. `--with-deps` apt-installed extra
+        # fonts and upgrades, which took over 10 minutes on a slow mirror.
+        run: npx playwright install chromium --only-shell
+        working-directory: frontend
+
+      - name: Run end-to-end journey
+        run: npm run test:e2e
+        working-directory: frontend
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: playwright-report
+          path: |
+            frontend/playwright-report/
+            frontend/test-results/
+          retention-days: 7
