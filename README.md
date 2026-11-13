@@ -6,6 +6,7 @@ use it.
 | Folder | Holds |
 |---|---|
 | [`bootstrap/`](bootstrap/) | Set up a new project for this way of working, from one prompt. |
+| [`design/`](design/) | The shared design tokens (`tokens.css`, pinned checksum) that apps copy and check. |
 | [`learnings/`](learnings/) | Lessons from real projects that apply beyond the project they came from. |
 
 ## Start a new project
