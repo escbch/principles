@@ -1,0 +1,115 @@
+/* tokens v1 */
+/*
+ * Shared design tokens for every app and the landing page: the neutral scale,
+ * the semantic colours (error, warning, positive, chart), shape and spacing.
+ * Custom properties only, no selectors for app classes.
+ *
+ * Do not edit a copy. Change this file here, raise the version line above and
+ * regenerate tokens.css.sha256 (design/README.md). The accent of an app
+ * (--accent, --accent-hover, --on-accent, --offer-*, --focus) is NOT here: it
+ * lives in the app's own app-tokens.css, loaded after this file.
+ *
+ * Light is the base. Dark applies for data-theme="dark" or, without a choice,
+ * when the system prefers dark. Keep the two dark blocks identical, and keep
+ * the explicit data-theme dark block last (the apps' contrast tests read it).
+ */
+
+:root {
+  /* ---- Neutral scale (light) ---- */
+  --ground: #f6f6f3;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --ink: #1a1a1a;
+  --ink-soft: #3b3b36;
+  --muted: #5c5c55;
+  --border: #e2e2dc;
+  --border-strong: #85857b;
+  --divider: #edede8;
+  --shadow: 0 1px 2px rgb(0 0 0 / 6%);
+
+  /* ---- Semantic colours ---- */
+  --error-ink: #8a2b06;
+  --error-ground: #fff1ea;
+  --warning-ink: #7a4a00;
+  --warning-ground: #fff4dc;
+  --positive-ink: #1d5c38;
+  --positive-ground: #e9f6ee;
+
+  /* ---- Semantic chart colours (income follows the app accent) ---- */
+  --chart-income: var(--accent);
+  --chart-spending: #b5532c;
+  --chart-saving: #2f7d4f;
+  --chart-result: var(--ink);
+  --chart-track: #f1f1ec;
+  --chart-zero: #8a8a80;
+
+  /* ---- Shape ---- */
+  --radius: 12px;
+  --radius-small: 10px;
+  --touch: 44px;
+
+  /* ---- Spacing scale (not colour, so only here, once) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ground: #121311;
+    --surface: #1c1d1b;
+    --surface-raised: #262724;
+    --ink: #ecece6;
+    --ink-soft: #cfcfc8;
+    --muted: #a3a39b;
+    --border: #33342f;
+    --border-strong: #7d7e75;
+    --divider: #2a2b27;
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+
+    --error-ink: #ffb499;
+    --error-ground: #3a1a0d;
+    --warning-ink: #f5c46b;
+    --warning-ground: #36290a;
+    --positive-ink: #8fdcb0;
+    --positive-ground: #12301f;
+
+    --chart-spending: #e8805a;
+    --chart-saving: #4fb87f;
+    --chart-track: #2a2b27;
+    --chart-zero: #8a8b82;
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --ground: #121311;
+  --surface: #1c1d1b;
+  --surface-raised: #262724;
+  --ink: #ecece6;
+  --ink-soft: #cfcfc8;
+  --muted: #a3a39b;
+  --border: #33342f;
+  --border-strong: #7d7e75;
+  --divider: #2a2b27;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+
+  --error-ink: #ffb499;
+  --error-ground: #3a1a0d;
+  --warning-ink: #f5c46b;
+  --warning-ground: #36290a;
+  --positive-ink: #8fdcb0;
+  --positive-ground: #12301f;
+
+  --chart-spending: #e8805a;
+  --chart-saving: #4fb87f;
+  --chart-track: #2a2b27;
+  --chart-zero: #8a8b82;
+
+  color-scheme: dark;
+}
