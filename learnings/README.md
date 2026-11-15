@@ -9,6 +9,7 @@ relevant ones from their `AGENTS.md`.
 | [`adaptive-loop.md`](adaptive-loop.md) | Shaping a feature that records outcomes, analyses trends or proposes changes |
 | [`ui-building.md`](ui-building.md) | Shaping or building a screen |
 | [`ci-speed.md`](ci-speed.md) | Writing or changing CI workflows |
+| [`api-contracts.md`](api-contracts.md) | Changing an API response model that a client is generated from |
 
 ## Adding a learning
 

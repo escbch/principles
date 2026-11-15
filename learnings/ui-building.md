@@ -21,7 +21,10 @@ Talk it through → Decide → Mockup → Small tickets → Check in the real ap
    the screen on top, with tests, and is merged on green before the next.
 4. **Check it in the running app.** Screenshot the real screen at phone width
    on seeded data after every ticket. Tests don't see cut-off text, a glyph
-   drawn as a sliver, or chips that wrap badly.
+   drawn as a sliver, or chips that wrap badly. Measure the page width
+   (`document.documentElement.scrollWidth`) with every form, panel and result
+   list open, not only at rest: an overflow often appears only once something
+   is open.
 
 ## Layout
 
@@ -34,6 +37,11 @@ Talk it through → Decide → Mockup → Small tickets → Check in the real ap
 - Chips wrap with a gap, without separator characters.
 - Draw small marks (dots, half dots) in CSS; Unicode symbols render
   differently on each device.
+- Let fieldsets shrink: `fieldset { min-inline-size: 0 }`. A fieldset's
+  default minimum width is its content's, so one input with a button beside it
+  can widen a whole phone form past the screen (Vacation Planner, 2026-11: a
+  place search pushed a 360 px form to 420 px). Give such inputs
+  `flex: 1 1 0; width: 0; min-width: 0`.
 
 ## Charts and colour
 
