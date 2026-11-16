@@ -1,4 +1,4 @@
-/* tokens v1 */
+/* tokens v2 */
 /*
  * Shared design tokens for every app and the landing page: the neutral scale,
  * the semantic colours (error, warning, positive, chart), shape and spacing.
@@ -26,6 +26,7 @@
   --border-strong: #85857b;
   --divider: #edede8;
   --shadow: 0 1px 2px rgb(0 0 0 / 6%);
+  --scrim: rgb(0 0 0 / 45%);
 
   /* ---- Semantic colours ---- */
   --error-ink: #8a2b06;
@@ -70,6 +71,7 @@
     --border-strong: #7d7e75;
     --divider: #2a2b27;
     --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+    --scrim: rgb(0 0 0 / 60%);
 
     --error-ink: #ffb499;
     --error-ground: #3a1a0d;
@@ -98,6 +100,7 @@
   --border-strong: #7d7e75;
   --divider: #2a2b27;
   --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+  --scrim: rgb(0 0 0 / 60%);
 
   --error-ink: #ffb499;
   --error-ground: #3a1a0d;

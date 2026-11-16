@@ -1,0 +1,30 @@
+/*
+ * Example accent for the reference pages (the green of the landing page,
+ * Personal Coach and Nutrition). Each app has its own app-tokens.css.
+ */
+:root {
+  --accent: #17624e;
+  --accent-hover: #0f4b3b;
+  --on-accent: #ffffff;
+  --offer-ground: #eaf3eb;
+  --offer-border: #c5ddd0;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #6fd3b0;
+    --accent-hover: #93e2c7;
+    --on-accent: #06281f;
+    --offer-ground: #12291f;
+    --offer-border: #24503f;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #6fd3b0;
+  --accent-hover: #93e2c7;
+  --on-accent: #06281f;
+  --offer-ground: #12291f;
+  --offer-border: #24503f;
+  --focus: #ffb95c;
+}

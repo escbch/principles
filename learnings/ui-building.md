@@ -5,6 +5,22 @@ Financial helper, News briefing, and later ones). Learned while building
 Personal Coach's load views and charts (2026-10). Nothing here depends on the
 domain: swap the examples for each app's own data.
 
+## Shared pieces
+
+Since 2026-11 the pieces every app has (frame and navigation, page header,
+buttons, fields, rows, cards, messages, empty, loading and error states) are
+shared: [`../design/components.css`](../design/components.css), shown on
+[`../design/reference.html`](../design/reference.html), with the rules for
+behaviour, wording, dates and numbers in
+[`../design/ui-rules.md`](../design/ui-rules.md). Read the rules before
+shaping or building a screen. Build a screen from the shared pieces first; add
+app CSS only for what the app alone needs.
+
+Learned in a review of five apps (2026-11): 502 screens, 113 findings. The
+apps had solved the same six things four or five times (frame, buttons,
+fields and validation, rows, error states, deleting), and most findings were
+those six again.
+
 ## The flow
 
 ```text
@@ -42,6 +58,25 @@ Talk it through → Decide → Mockup → Small tickets → Check in the real ap
   can widen a whole phone form past the screen (Vacation Planner, 2026-11: a
   place search pushed a 360 px form to 420 px). Give such inputs
   `flex: 1 1 0; width: 0; min-width: 0`.
+
+- Load base CSS before feature CSS, in the source and in the built file. With
+  the base last, its rules beat feature modifiers of the same specificity
+  (Financial Helper, 2026-11: a status mark covered the line above it, and
+  four button variants never applied).
+- A class with a `display` rule overrides the `hidden` attribute. Keep
+  `[hidden] { display: none !important }` in the base (landing page, 2026-11:
+  a hidden "Log in" link showed while the session was checked).
+- Put every rule meant for the phone layout inside its media query (Personal
+  Coach, 2026-11: a rule that hides the bottom bar while a field has focus
+  also hid the desktop navigation).
+- Field text is 16 px or more; smaller text makes iPhones zoom the page on
+  focus. A field inside a `label` inherits the label's size unless told
+  otherwise.
+- A form or message appears where the person tapped: in place of the button
+  or row, scrolled into view, with focus. Not at a fixed place on the page
+  (Vacation Planner, 2026-11: an edit form opened 3,835 px above the row).
+- A row or card that leads somewhere is clickable as a whole. A text link of
+  20 px is not a way forward on a phone.
 
 ## Charts and colour
 
@@ -95,6 +130,9 @@ Talk it through → Decide → Mockup → Small tickets → Check in the real ap
 
 ## Not wanted
 
+- An app-own button, field, row or frame where a shared piece exists.
+- A filled button as a selected state, or repeated on every row.
+- A server library's own sentence on the screen.
 - Building before the open questions are answered.
 - Colour as the only carrier of meaning, or values that only show on hover.
 - Screens that recalculate domain numbers.
