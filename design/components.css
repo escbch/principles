@@ -1,0 +1,1111 @@
+/* components v1 */
+/*
+ * The pieces every app and the landing page share: base rules, app frame and
+ * navigation, page header, buttons, links, form fields, list rows, cards,
+ * chips, messages, empty/loading/error states, confirmation.
+ *
+ * Built only on tokens.css (v2 or later, for --scrim) and the app's
+ * app-tokens.css (accent). No colour literal in this file. Decided in
+ * escbch/site#52 (2026-11-16); the rules are in ui-rules.md, the picture is
+ * reference.html. Load order: tokens.css, app-tokens.css,
+ * components.css, then the app's own CSS.
+ *
+ * Do not edit a copy (design/README.md). One breakpoint: 900 px (56.25rem).
+ * Below it the phone layout applies, from it the desktop layout.
+ */
+
+:root {
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --text-s: 0.875rem; /* 14 px: labels, meta lines, chips */
+  --text-xs: 0.8125rem; /* 13 px: hints, navigation labels */
+  --frame: 67.5rem; /* 1080 px: widest content and the bar's inner width */
+  --measure: 45rem; /* 720 px: forms and running text */
+  --gutter: var(--space-4);
+  --bar: 3.5rem; /* 56 px: app bar and bottom navigation */
+  --side: 15rem; /* 240 px: side list from 900 px */
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* The attribute must win over any display rule of a class (landing page, 2026-11). */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--ground);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.25rem;
+}
+h3 {
+  font-size: 1rem;
+}
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* A fieldset's default minimum width is its content's (ui-building.md). */
+fieldset {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+legend {
+  padding: 0;
+  font-weight: 700;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon-small {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.muted {
+  color: var(--muted);
+}
+.amount {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- App frame ---------- */
+
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.app-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--bar);
+  max-width: var(--frame);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+/* Square controls at the bar's start sit on the gutter line, not inside it. */
+.app-bar-inner > .btn-icon:first-child,
+.app-bar-inner > .app-bar-site:first-child {
+  margin-inline-start: calc(var(--space-2) * -1);
+}
+.app-bar-site {
+  display: inline-grid;
+  place-items: center;
+  width: var(--touch);
+  height: var(--touch);
+  border-radius: var(--radius-small);
+  color: var(--muted);
+}
+.app-bar-site:hover {
+  background: var(--offer-ground);
+  color: var(--accent-hover);
+}
+.app-bar-name {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch);
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.app-bar-end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-inline-start: auto;
+  min-width: 0;
+}
+
+/* Main navigation: 2 to 5 fixed places. One element, two layouts. */
+.app-nav {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 20;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.app-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: var(--bar);
+  padding-inline: 2px;
+  border-top: 3px solid transparent;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.app-nav a:hover {
+  background: var(--offer-ground);
+  color: var(--accent-hover);
+}
+.app-nav a[aria-current] {
+  border-top-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
+.app-nav a:focus-visible {
+  outline-offset: -3px;
+}
+/* Room for the fixed bar, so the last row is never under it. */
+.app:has(.app-nav) {
+  padding-bottom: calc(var(--bar) + env(safe-area-inset-bottom, 0px));
+}
+
+.app-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: var(--frame);
+  margin-inline: auto;
+}
+
+.page {
+  min-width: 0;
+  padding: var(--space-4) var(--gutter) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+/* Forms and running text keep a readable width inside a wide page. */
+.measure {
+  max-width: var(--measure);
+}
+
+/* Side list: a list the person grows (categories) or an app's sub-sections.
+   A drawer below 900 px, a column from 900 px. */
+.side {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  width: min(20rem, 86vw);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-2) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  background: var(--surface);
+  border-inline-end: 1px solid var(--border);
+  transform: translateX(-100%);
+  visibility: hidden;
+}
+.side[data-open] {
+  transform: none;
+  visibility: visible;
+}
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: var(--scrim);
+}
+.side-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-inline-start: var(--space-3);
+}
+.side-label {
+  padding: var(--space-3) var(--space-3) var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--muted);
+}
+.side-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.side-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--touch);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-small);
+  color: var(--ink);
+  text-decoration: none;
+}
+.side-item > span:first-of-type {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.side-item:hover {
+  background: var(--offer-ground);
+  color: var(--ink);
+}
+.side-item[aria-current] {
+  background: var(--offer-ground);
+  color: var(--accent);
+  font-weight: 700;
+}
+.side-count {
+  font-size: var(--text-s);
+  font-weight: 400;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.side-foot {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--divider);
+}
+
+@media (max-width: 56.24rem) {
+  /* The keyboard needs the room; only on the phone layout (Coach, 2026-11). */
+  body:has(input:not([type='checkbox'], [type='radio']):focus, textarea:focus) .app-nav {
+    display: none;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 56.25rem) {
+  :root {
+    --gutter: var(--space-5);
+  }
+  h1 {
+    font-size: 1.75rem;
+  }
+  .phone-only {
+    display: none !important;
+  }
+  .app-bar-inner {
+    gap: var(--space-4);
+  }
+  .app-nav {
+    position: static;
+    display: flex;
+    gap: var(--space-1);
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+  .app-nav a {
+    flex-direction: row;
+    min-height: var(--bar);
+    padding-inline: var(--space-3);
+    border-top: 0;
+    border-bottom: 3px solid transparent;
+    padding-top: 3px;
+    font-size: 1rem;
+  }
+  .app-nav a[aria-current] {
+    border-bottom-color: var(--accent);
+  }
+  .app-nav .icon {
+    display: none;
+  }
+  .app:has(.app-nav) {
+    padding-bottom: 0;
+  }
+  .app-body:has(> .side) {
+    grid-template-columns: var(--side) minmax(0, 1fr);
+  }
+  .side {
+    position: sticky;
+    top: 0;
+    z-index: auto;
+    width: auto;
+    max-height: 100dvh;
+    align-self: start;
+    padding: var(--space-4) var(--space-2) var(--space-4) var(--space-3);
+    background: none;
+    border: 0;
+    transform: none;
+    visibility: visible;
+  }
+  .scrim,
+  .side-head {
+    display: none;
+  }
+  /* An app whose content is a workspace (list beside editor) may use the window. */
+  .app-full {
+    --frame: 100rem;
+  }
+}
+
+/* ---------- Page header ---------- */
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+.page-header > div {
+  min-width: 0;
+}
+.page-sub {
+  color: var(--muted);
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--touch);
+  margin-inline-start: -0.25rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.section + .section {
+  margin-top: var(--space-2);
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  color: var(--accent);
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--offer-ground);
+  color: var(--accent-hover);
+}
+/* The one main action of a view or form. Never a selected state, never per row. */
+.btn-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.btn-primary:hover {
+  border-color: var(--accent-hover);
+  background: var(--accent-hover);
+  color: var(--on-accent);
+}
+/* Starts something that cannot come back; always followed by a confirmation. */
+.btn-danger {
+  border-color: var(--error-ink);
+  color: var(--error-ink);
+}
+.btn-danger:hover {
+  background: var(--error-ground);
+  color: var(--error-ink);
+}
+/* The confirming button inside a confirmation. */
+.btn-danger-solid {
+  border-color: var(--error-ink);
+  background: var(--error-ink);
+  color: var(--surface);
+}
+.btn-danger-solid:hover {
+  background: var(--error-ink);
+  color: var(--surface);
+  filter: brightness(0.92);
+}
+/* A text button: the least important action of a row. */
+.btn-quiet {
+  border-color: transparent;
+  background: none;
+  padding-inline: var(--space-2);
+}
+.btn-icon {
+  display: inline-grid;
+  place-items: center;
+  width: var(--touch);
+  height: var(--touch);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-small);
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.btn-icon:hover {
+  background: var(--offer-ground);
+  color: var(--accent-hover);
+}
+.btn-icon.btn-outline {
+  border-color: var(--border-strong);
+  background: var(--surface);
+  color: var(--accent);
+}
+.btn-block {
+  width: 100%;
+}
+.btn:disabled,
+.btn[aria-disabled='true'],
+.btn-icon:disabled {
+  border-color: var(--border);
+  background: var(--divider);
+  color: var(--muted);
+  cursor: not-allowed;
+  filter: none;
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* A link that stands alone (not inside a sentence) gets a full tap height. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--touch);
+  font-weight: 600;
+}
+
+/* ---------- Form fields ---------- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: var(--space-3);
+}
+.label {
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.optional {
+  font-weight: 400;
+  color: var(--muted);
+}
+.hint {
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: var(--touch);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  color: var(--ink);
+  /* Never under 16 px: smaller text makes iPhones zoom the page on focus. */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted);
+}
+.input[aria-invalid='true'],
+.select[aria-invalid='true'],
+.textarea[aria-invalid='true'] {
+  border: 2px solid var(--error-ink);
+  padding: calc(var(--space-2) - 1px) calc(var(--space-3) - 1px);
+}
+.field-error {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--error-ink);
+}
+/* An input with a button beside it must be able to shrink (ui-building.md). */
+.input-group {
+  display: flex;
+  gap: var(--space-2);
+}
+.input-group > .input {
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--touch);
+  cursor: pointer;
+}
+.check input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  accent-color: var(--accent);
+}
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+@media (max-width: 30rem) {
+  .form-actions > .btn-primary {
+    flex: 1 1 100%;
+  }
+  .form-actions > .btn:not(.btn-primary) {
+    flex: 1 1 0;
+  }
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+/* A suggestion or question from the app: tinted, with its reason, never imposed. */
+.card-offer {
+  border-color: var(--offer-border);
+  background: var(--offer-ground);
+  box-shadow: none;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-4);
+}
+/* A card that is one link: the whole card is the target. */
+a.card {
+  color: var(--ink);
+  text-decoration: none;
+}
+a.card:hover {
+  border-color: var(--accent);
+  background: var(--offer-ground);
+}
+a.card h2,
+a.card h3 {
+  color: var(--accent);
+}
+
+/* ---------- Lists ---------- */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.list > li + li {
+  border-top: 1px solid var(--divider);
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 3.5rem;
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink);
+  text-decoration: none;
+}
+/* A row that leads somewhere: the whole row is the link. */
+a.row:hover {
+  background: var(--offer-ground);
+}
+a.row:focus-visible {
+  outline-offset: -3px;
+}
+.row[aria-current] {
+  background: var(--offer-ground);
+}
+.row-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.row-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.row-meta {
+  font-size: var(--text-s);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+/* A preview of longer text may end after two lines; a value may not. */
+.row-excerpt {
+  font-size: var(--text-s);
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.row-end {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-s);
+  color: var(--muted);
+}
+.row-end.amount {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.row-mark {
+  flex: none;
+  color: var(--muted);
+}
+/* A checkable row (shopping list, checklist). */
+.row-check input {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  flex: none;
+  accent-color: var(--accent);
+}
+.row-check:has(input:checked) .row-title {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+/* ---------- Row menu: the further actions of a row ---------- */
+
+/* Opens in the page under its row, from the row's "..." button. Editing first,
+   deleting last. Behaviour (Escape, press outside, one open at a time) is the
+   app's code; see ui-rules.md. */
+.menu {
+  list-style: none;
+  margin: 0 var(--space-4) var(--space-3);
+  padding: var(--space-1);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow);
+}
+.menu > li > button,
+.menu > li > a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--touch);
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink);
+  font-weight: 600;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+.menu > li > button:hover,
+.menu > li > a:hover {
+  background: var(--offer-ground);
+}
+.menu > li > .menu-danger {
+  color: var(--error-ink);
+}
+.menu > li > .menu-danger:hover {
+  background: var(--error-ground);
+}
+.btn-icon[aria-expanded='true'] {
+  border-color: var(--accent);
+  background: var(--offer-ground);
+  color: var(--accent);
+}
+
+.table-box {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: start;
+  vertical-align: top;
+}
+.table th {
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.table tr + tr td {
+  border-top: 1px solid var(--divider);
+}
+.table .num {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- Chips, switches of view, tabs ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.125rem var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--ground);
+  color: var(--ink-soft);
+  font-size: var(--text-s);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.chip-positive {
+  border-color: transparent;
+  background: var(--positive-ground);
+  color: var(--positive-ink);
+}
+.chip-warning {
+  border-color: transparent;
+  background: var(--warning-ground);
+  color: var(--warning-ink);
+}
+.chip-error {
+  border-color: transparent;
+  background: var(--error-ground);
+  color: var(--error-ink);
+}
+.chip-muted {
+  background: none;
+  color: var(--muted);
+  font-weight: 400;
+}
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* One of several views or filters. Selected is tinted, never filled. */
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.segmented > * {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.segmented > [aria-pressed='true'],
+.segmented > [aria-current],
+.segmented > :has(input:checked) {
+  border-color: var(--accent);
+  background: var(--offer-ground);
+  color: var(--accent);
+}
+
+/* ---------- Disclosure: a section that opens in place ---------- */
+
+/* Always shows that it opens: a chevron at the row's end, turning when open. */
+.disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--touch);
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+}
+.disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.disclosure > summary::after {
+  content: '';
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-inline-end: var(--space-1);
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-25%) rotate(45deg);
+}
+.disclosure[open] > summary::after {
+  transform: translateY(25%) rotate(-135deg);
+}
+.disclosure > :not(summary) {
+  margin-top: var(--space-2);
+}
+
+/* ---------- Messages ---------- */
+
+.msg {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-small);
+  background: var(--offer-ground);
+  color: var(--ink);
+}
+.msg > div {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+.msg-error {
+  background: var(--error-ground);
+  color: var(--error-ink);
+}
+.msg-warning {
+  background: var(--warning-ground);
+  color: var(--warning-ink);
+}
+.msg-positive {
+  background: var(--positive-ground);
+  color: var(--positive-ink);
+}
+/* The short "saved" line beside the control that caused it. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--positive-ink);
+}
+
+/* ---------- Empty, loading, error ---------- */
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+}
+.state-title {
+  font-weight: 700;
+}
+.state > .btn,
+.state > .btn-row {
+  margin-top: var(--space-2);
+}
+.state-error {
+  border: 0;
+  background: var(--error-ground);
+  color: var(--error-ink);
+}
+.state-detail {
+  font-size: var(--text-xs);
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.skeleton > span:not(.visually-hidden) {
+  display: block;
+  height: 0.875rem;
+  border-radius: 999px;
+  background: var(--divider);
+}
+.skeleton > span:nth-child(odd):not(.visually-hidden) {
+  width: 55%;
+}
+.skeleton > span:nth-child(even):not(.visually-hidden) {
+  width: 80%;
+  background: var(--chart-track);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton > span:not(.visually-hidden) {
+    animation: skeleton-pulse 1.4s ease-in-out infinite alternate;
+  }
+  @keyframes skeleton-pulse {
+    to {
+      opacity: 0.45;
+    }
+  }
+}
+
+/* ---------- Confirmation, in place of the row or under the button ---------- */
+
+.confirm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--error-ink);
+  border-radius: var(--radius-small);
+  background: var(--surface);
+}
+.confirm-question {
+  font-weight: 700;
+}
+
+/* An overlay only where the person must answer before anything else
+   (leaving unsaved changes, a save conflict). Native <dialog>. */
+.dialog {
+  width: min(28rem, calc(100vw - 2 * var(--space-4)));
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  color: var(--ink);
+}
+.dialog::backdrop {
+  background: var(--scrim);
+}
+.dialog > * + * {
+  margin-top: var(--space-3);
+}
