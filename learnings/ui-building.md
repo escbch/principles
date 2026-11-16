@@ -40,7 +40,8 @@ Talk it through → Decide → Mockup → Small tickets → Check in the real ap
    drawn as a sliver, or chips that wrap badly. Measure the page width
    (`document.documentElement.scrollWidth`) with every form, panel and result
    list open, not only at rest: an overflow often appears only once something
-   is open.
+   is open. [`../design/capture/`](../design/capture/README.md) does
+   both for every screen, at phone and desktop width, in light and dark.
 
 ## Layout
 
