@@ -139,6 +139,11 @@ needs my decision. Don't merge.
 Batches: "Implement #212, #213, #214 in that order, one PR each, stacked where
 one needs the previous. State the merge order in each PR."
 
+To run a list of work packages without switching models or pasting prompts,
+use [`automation/`](automation/README.md): an orchestrator starts a builder
+session per ticket and a reviewer session with a fresh context, sends the
+findings back once, and the builder opens the pull request.
+
 - **Never invent a domain rule.** Build the unambiguous part; list the rest
   under **Needs user decision**.
 - **Report:** files changed, tests run (with counts), lint result, migrations,
