@@ -43,6 +43,24 @@ Tickets, in order: <owner/repo#n>, <owner/repo#n (stacked on #m)>, …
 Project handoff: <path or issue comment that holds the project's rules>.
 ```
 
+## First run (2026-11-16)
+
+One ticket, escbch/site#54 (a static page: 11 files, about 100 lines changed
+beside two copied files):
+
+| Step | Model | Time | Context used | Cost |
+|---|---|---|---|---|
+| Build, hand over | `claude-sonnet-5-5` | 2 min | | |
+| Review | `claude-opus-5-5`, medium | 2 min | 112,000 tokens | 0.96 USD |
+| Fix once, open the pull request | the builder again | 1 min | 136,000 tokens in total | 0.91 USD in total |
+
+- The reviewer confirmed all five acceptance criteria, reproduced every
+  command, and found one spacing defect the builder's measurements had not
+  shown. The builder fixed it and opened the pull request.
+- Both children reported by themselves; the scheduled check was not needed.
+- Reading the role file and the handoff from a repository worked; the start
+  messages stayed short.
+
 ## Limits
 
 - A session that finishes cleanly may not report back. The orchestrator checks
