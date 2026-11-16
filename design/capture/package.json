@@ -1,0 +1,8 @@
+{
+  "name": "ui-capture",
+  "private": true,
+  "description": "Capture and measure the screens of an app (see README.md)",
+  "dependencies": {
+    "axe-core": "^4.14.1"
+  }
+}

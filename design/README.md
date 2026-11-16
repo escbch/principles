@@ -10,6 +10,7 @@ What every app and the landing page share, in four parts:
 | `reference.html` | The picture: every shared piece with its rules, in light and dark and with two accents. `example-notes.html` (side list, entry list, entry form) and `example-app.html` (main navigation) show whole frames. Open them from a checkout; they load the files beside them. |
 | `icons.svg` | The shared icon set as SVG symbols. |
 | `app-tokens.example.css` | An example accent for the reference pages. |
+| `capture/` | The script that screenshots and measures every screen of an app the same way, and the check for a change to the shared pieces ([`capture/README.md`](capture/README.md)). |
 | `*.sha256` | The pinned checksum of `tokens.css` and of `components.css`, in `sha256sum` format. |
 
 App accents are not here; each app keeps its own in `app-tokens.css`.
@@ -23,7 +24,8 @@ submodule, no build coupling. Markup and behaviour stay in each app.
 
 1. Edit the file here, through a pull request. A change to a shared piece
    comes with its picture: update `reference.html` in the same pull request,
-   and `ui-rules.md` if a rule changes.
+   and `ui-rules.md` if a rule changes. Run `capture/run.reference.cjs` and
+   say in the pull request that every line passes.
 2. Raise the file's version line (`v1` to `v2`). Any change to the file raises
    it.
 3. Run `sha256sum tokens.css > tokens.css.sha256` or
