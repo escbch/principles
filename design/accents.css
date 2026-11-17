@@ -1,0 +1,233 @@
+/* accents v1 */
+/*
+ * The accent of every app, as the full token group in light and dark.
+ * Decided in escbch/site#52 on 2026-11-17. This file is a source, not a
+ * stylesheet to load: an app copies its block into its app-tokens.css
+ * (selectors as in app-tokens.example.css; keep the two dark blocks alike).
+ * The focus ring is the same in every app. How the set was measured:
+ * README.md, section Accents.
+ */
+
+/* ---------- Landing page: Green ---------- */
+:root {
+  --accent: #17624e;
+  --accent-hover: #0f4b3b;
+  --on-accent: #ffffff;
+  --offer-ground: #eaf3eb;
+  --offer-border: #c5ddd0;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #6fd3b0;
+    --accent-hover: #93e2c7;
+    --on-accent: #06281f;
+    --offer-ground: #12291f;
+    --offer-border: #24503f;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #6fd3b0;
+  --accent-hover: #93e2c7;
+  --on-accent: #06281f;
+  --offer-ground: #12291f;
+  --offer-border: #24503f;
+  --focus: #ffb95c;
+}
+
+/* ---------- Financial Helper: Blue ---------- */
+:root {
+  --accent: #1f4fb8;
+  --accent-hover: #163a87;
+  --on-accent: #ffffff;
+  --offer-ground: #eef3ff;
+  --offer-border: #c7d5f5;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #8fb0ff;
+    --accent-hover: #b0c7ff;
+    --on-accent: #0c1a3d;
+    --offer-ground: #17223f;
+    --offer-border: #2c3f73;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #8fb0ff;
+  --accent-hover: #b0c7ff;
+  --on-accent: #0c1a3d;
+  --offer-ground: #17223f;
+  --offer-border: #2c3f73;
+  --focus: #ffb95c;
+}
+
+/* ---------- Vacation Planner: Petrol ---------- */
+:root {
+  --accent: #0975a2;
+  --accent-hover: #045d82;
+  --on-accent: #ffffff;
+  --offer-ground: #e9f6fe;
+  --offer-border: #c1def0;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #73e8fe;
+    --accent-hover: #baf3ff;
+    --on-accent: #011a1f;
+    --offer-ground: #0a2a30;
+    --offer-border: #16505a;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #73e8fe;
+  --accent-hover: #baf3ff;
+  --on-accent: #011a1f;
+  --offer-ground: #0a2a30;
+  --offer-border: #16505a;
+  --focus: #ffb95c;
+}
+
+/* ---------- Personal Coach: Violet ---------- */
+:root {
+  --accent: #3f13a2;
+  --accent-hover: #2c0179;
+  --on-accent: #ffffff;
+  --offer-ground: #f2f2fe;
+  --offer-border: #d5d5fa;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #9388f7;
+    --accent-hover: #a9a3fd;
+    --on-accent: #14122b;
+    --offer-ground: #232238;
+    --offer-border: #44426c;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #9388f7;
+  --accent-hover: #a9a3fd;
+  --on-accent: #14122b;
+  --offer-ground: #232238;
+  --offer-border: #44426c;
+  --focus: #ffb95c;
+}
+
+/* ---------- Nutrition: Plum ---------- */
+:root {
+  --accent: #7a1676;
+  --accent-hover: #5d015a;
+  --on-accent: #ffffff;
+  --offer-ground: #fdeefb;
+  --offer-border: #edcee9;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #c56ac3;
+    --accent-hover: #d389d0;
+    --on-accent: #220d21;
+    --offer-ground: #301e2f;
+    --offer-border: #5c395b;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #c56ac3;
+  --accent-hover: #d389d0;
+  --on-accent: #220d21;
+  --offer-ground: #301e2f;
+  --offer-border: #5c395b;
+  --focus: #ffb95c;
+}
+
+/* ---------- Notes: Slate ---------- */
+:root {
+  --accent: #3a3c48;
+  --accent-hover: #262833;
+  --on-accent: #ffffff;
+  --offer-ground: #f1f3fc;
+  --offer-border: #d6d8e7;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #9da4ad;
+    --accent-hover: #b4bac1;
+    --on-accent: #14161a;
+    --offer-ground: #21262b;
+    --offer-border: #414853;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #9da4ad;
+  --accent-hover: #b4bac1;
+  --on-accent: #14161a;
+  --offer-ground: #21262b;
+  --offer-border: #414853;
+  --focus: #ffb95c;
+}
+
+/* ---------- Spare: Raspberry (may replace Plum, never beside it) ---------- */
+:root {
+  --accent: #992e73;
+  --accent-hover: #7f105c;
+  --on-accent: #ffffff;
+  --offer-ground: #feeef6;
+  --offer-border: #f3cde1;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #dc6682;
+    --accent-hover: #e7879a;
+    --on-accent: #280b12;
+    --offer-ground: #361d22;
+    --offer-border: #673741;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #dc6682;
+  --accent-hover: #e7879a;
+  --on-accent: #280b12;
+  --offer-ground: #361d22;
+  --offer-border: #673741;
+  --focus: #ffb95c;
+}
+
+/* ---------- Spare: Navy (may replace Slate, never beside it) ---------- */
+:root {
+  --accent: #1e284e;
+  --accent-hover: #0c1438;
+  --on-accent: #ffffff;
+  --offer-ground: #f0f3fc;
+  --offer-border: #d2d9eb;
+  --focus: #985300;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #98a3d3;
+    --accent-hover: #b0bae1;
+    --on-accent: #111526;
+    --offer-ground: #212431;
+    --offer-border: #41465d;
+    --focus: #ffb95c;
+  }
+}
+:root[data-theme='dark'] {
+  --accent: #98a3d3;
+  --accent-hover: #b0bae1;
+  --on-accent: #111526;
+  --offer-ground: #212431;
+  --offer-border: #41465d;
+  --focus: #ffb95c;
+}

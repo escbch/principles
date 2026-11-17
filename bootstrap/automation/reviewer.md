@@ -25,7 +25,12 @@ handoff, the builder's hand-over message, and the orchestrator's session ID.
    - tests: do they test what a person sees, and would they fail if the rule
      broke;
    - the builder's claims: run the ticket's commands once and compare with the
-     hand-over message.
+     hand-over message. In capture lines `axeL=- axeD=-` is a clean axe run;
+     only `axe-not-installed` means it did not run;
+   - screens: look at the screenshots on `pr-screenshots` where the builder
+     pushed them, before running the app yourself;
+   - before raising a rule from a pasted handoff, check which repository the
+     rule belongs to.
 3. **Do not** re-design, restyle or suggest alternatives of taste. Do not
    review code the branch did not change. Do not run the whole app again
    unless a finding depends on it; then check that one thing.

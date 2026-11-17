@@ -21,6 +21,9 @@ shared pieces.
   the bottom (icon over label, 56 px plus the phone's safe area). From 900 px
   the same links sit in the top bar as text. More than 5 places: show 4 and
   "Mehr" / "More", at both widths.
+- A place's label is one short word. A label that does not fit the bottom
+  bar breaks at a syllable with a hyphen ("Einstellun-gen"); it is never cut
+  at any letter. This needs `<html lang>`.
 - A list the person grows (categories) or an app's sub-sections is a side
   list: a 240 px column from 900 px, a drawer under 900 px, opened by a menu
   button at the bar's start.
@@ -54,7 +57,9 @@ shared pieces.
   **Quiet** (text only): the least important action of a row.
 - **Destructive** (red outline): only for an action that loses data.
 - A selected view or filter is a tinted pill with an accent border
-  (`.segmented`), never filled.
+  (`.segmented`), never filled. The control takes links, buttons or radio
+  inputs inside labels; the stylesheet hides the radio and shows its focus on
+  the pill.
 - Order: the main action first, "Abbrechen" after it.
 - A disabled button looks disabled, and the reason stands beside it. Prefer an
   enabled button that answers the tap with the reason.
@@ -78,7 +83,9 @@ shared pieces.
   "Erneut versuchen". What was typed stays.
 - A form that opens in place replaces the button that opened it, scrolls into
   view and takes focus in its first field. Closing returns focus to that
-  button. Escape cancels.
+  button. Escape cancels. The code sets that focus itself: Safari does not
+  focus a button on click, so "the element that had focus" is not the button
+  there.
 - Checkbox and radio: a 20 px box in a 44 px row, one option per line.
 
 ## Lists
@@ -92,7 +99,8 @@ shared pieces.
   returns to the "…" button), on a press outside and after an action. One menu
   is open at a time.
 - A row that leads somewhere is one link as a whole, at least 56 px high, with
-  no button inside it.
+  no button inside it. Its accessible name is its whole visible content, not
+  the title alone.
 - The accessible name of a control starts with its visible text
   ("Auswählen: Banane", not "Banane wählen").
 
@@ -131,8 +139,9 @@ shared pieces.
   stored in the browser for the site's domain. Default: the browser's language
   if German or English, else English; the system's theme. Each app applies
   both before its first paint and has no control of its own.
-- Every app has its own accent, from one validated set; the stylesheet never
-  names a colour.
+- Every app has its own accent, from one validated set
+  ([`accents.css`](accents.css)); the stylesheet never names a colour. The
+  focus ring is the same amber in every app.
 
 ## Dates and numbers
 
@@ -193,6 +202,8 @@ what to do, without codes and without "leider".
 - Icons: the inline SVG set in [`icons.svg`](icons.svg) (24 px, stroke 2,
   current colour). No emoji and no Unicode marks as controls.
 - No web fonts, no assets from another origin.
+- Every app works in Safari (iPhone, iPad, Mac) as well as in Chrome and
+  Firefox. A behaviour that differs there is a defect.
 - A scroll box (table, wide figure) is reachable by keyboard (`tabindex="0"`
   and a name).
 - Page wrappers carry no colour rules; a class name is used for one thing.
