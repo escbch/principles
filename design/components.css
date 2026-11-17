@@ -1,4 +1,4 @@
-/* components v1 */
+/* components v2 */
 /*
  * The pieces every app and the landing page share: base rules, app frame and
  * navigation, page header, buttons, links, form fields, list rows, cards,
@@ -216,6 +216,8 @@ legend {
   font-weight: 600;
   color: var(--muted);
   text-decoration: none;
+  /* A label that does not fit breaks at a syllable (needs <html lang>). */
+  hyphens: auto;
   overflow-wrap: anywhere;
   text-align: center;
 }
@@ -934,6 +936,23 @@ a.row:focus-visible {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+}
+/* Radio inputs inside the labels: the pill is the control. */
+.segmented > label {
+  position: relative;
+}
+.segmented > label > input[type='radio'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.segmented > label:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 .segmented > [aria-pressed='true'],
 .segmented > [aria-current],

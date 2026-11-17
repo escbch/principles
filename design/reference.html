@@ -55,6 +55,9 @@
       margin-inline: calc(var(--gutter) * -1);
     }
   }
+  .demo-narrow {
+    max-width: 25.75rem;
+  }
   .rules {
     margin: 0;
     padding-inline-start: 1.1rem;
@@ -225,6 +228,21 @@
           </div>
         </div>
         <p class="demo-label">Under 900 px the four links above form the bottom bar; here they are shown in the page flow.</p>
+        <div class="demo demo-frame demo-ground demo-narrow">
+          <div class="app-bar">
+            <div class="app-bar-inner">
+              <a class="app-bar-name" href="#frame">Financial Helper</a>
+              <nav class="app-nav" aria-label="Beispiel mit fünf Orten">
+                <a href="#frame" aria-current="page"><svg class="icon"><use href="#i-home" /></svg>Übersicht</a>
+                <a href="#frame"><svg class="icon"><use href="#i-wallet" /></svg>Vermögen</a>
+                <a href="#frame"><svg class="icon"><use href="#i-list" /></svg>Verträge</a>
+                <a href="#frame"><svg class="icon"><use href="#i-chart" /></svg>Ziele</a>
+                <a href="#frame"><svg class="icon"><use href="#i-sliders" /></svg>Einstellungen</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <p class="demo-label">Five places at phone width (sample labels): a label that does not fit breaks at a syllable. Prefer one short word.</p>
       </section>
 
       <section class="section ref-section" id="header">
@@ -453,6 +471,12 @@
             <button type="button" aria-pressed="true">4 Wochen</button>
             <button type="button" aria-pressed="false">3 Monate</button>
             <button type="button" aria-pressed="false">Alles</button>
+          </div>
+          <span class="demo-label">The same control with radio inputs: the input is hidden, the pill shows the choice and the keyboard focus</span>
+          <div class="segmented" role="radiogroup" aria-label="Darstellung">
+            <label><input type="radio" name="ref-theme" checked />System</label>
+            <label><input type="radio" name="ref-theme" />Hell</label>
+            <label><input type="radio" name="ref-theme" />Dunkel</label>
           </div>
         </div>
       </section>
