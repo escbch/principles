@@ -61,6 +61,15 @@ The accent (`--accent`, `--accent-hover`, `--on-accent`, `--offer-ground`,
 system dark, explicit dark), and tokens only that app uses. Every app has its
 own accent, different from every other app's.
 
+## Theme before first paint under a strict CSP
+
+The apps serve `Content-Security-Policy: default-src 'self'`, which blocks
+the inline script that applies the theme and language before the first paint.
+Do not weaken the policy. Put the script in a same-origin file and load it with
+a plain render-blocking `<script src>` in `<head>` (no `async`, `defer` or
+`type="module"`), before the stylesheets. The landing page (`prefs-head.js`)
+and Vacation Planner (`public/theme-init.js`) do this.
+
 ## Adopting the shared pieces in an app
 
 An app replaces its own rules piece by piece; until a piece is replaced, the

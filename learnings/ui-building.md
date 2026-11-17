@@ -21,6 +21,26 @@ apps had solved the same six things four or five times (frame, buttons,
 fields and validation, rows, error states, deleting), and most findings were
 those six again.
 
+## Adopting the shared stylesheet
+
+Learned in the first adoption of the shared pieces in six apps (2026-11).
+
+- When an app adopts a shared stylesheet that defines `.card`, `.row`,
+  `.status` or `.page`, check every app class of the same name and every app
+  class combined with them. In Financial Helper an app class set
+  `display: flex` without a direction and stacked once the shared `.card` (a
+  flex column) applied under it; Vacation Planner and Financial Helper had to
+  rename their own `.row` and `.chip`.
+- After renaming the frame's classes, search code and tests for selectors of
+  the old names. In Personal Coach three dialogs had made `.app-header` inert
+  and silently stopped doing so; the shared bottom bar (z-index 20) then
+  painted over a dialog with z-index 10.
+- Prettier rewrites checked copies of shared files; list them in
+  `.prettierignore`.
+- A screenshot set that leaves out a screen hides the defect on it: capture
+  every route the change can reach, and measure every width the acceptance
+  criteria name.
+
 ## The flow
 
 ```text
