@@ -20,12 +20,19 @@ request yourself, follow this file instead.
 ## Steps
 
 1. **Read** the ticket, the handoff, `AGENTS.md`, then only the files the
-   ticket names. Check out your branch from the base branch.
+   ticket names. Check out your branch from the base branch. If the ticket
+   touches screens and the repository holds checked copies of shared files,
+   first update them to the current version with the repository's update
+   script, and name the versions in the pull request.
 2. **Build.** Small commits. Never invent a rule, a text or a colour; build the
    unambiguous part and note the rest for **Needs user decision**.
 3. **Prove.** Run every command the ticket lists, once, before handing over.
    Do what the ticket asks for the running app (screenshots, measurements) and
-   keep the output.
+   keep the output. Measure every width the acceptance criteria name and
+   capture every route the change can reach. In the capture script's lines,
+   `axeL=- axeD=-` means axe ran and found nothing; `axe-not-installed` means
+   it did not run (`npm ci` in `design/capture` first). After renaming a
+   class, search code and tests for selectors of the old name.
 4. **Hand over for review.** Commit, push the branch, and do **not** open a
    pull request. Send the orchestrator one message that starts with
    `READY FOR REVIEW` (format below). Then stop and wait.
@@ -36,12 +43,37 @@ request yourself, follow this file instead.
 6. **Open the pull request** against the base branch with
    `.github/pull_request_template.md` where the repository has one: "Closes
    #<n>", deviations, the review's result (fixed, not fixed and why), manual
-   steps, **Needs user decision**. Attach what the ticket asks for. Send the
-   orchestrator `PR <url>`. Then stop.
+   steps, **Needs user decision**. Attach what the ticket asks for; put the
+   capture run file into the pull request's text, and screenshots where the
+   section below says. Send the orchestrator `PR <url>`. Then stop.
 
 If you cannot go on (a rule is missing, access is denied, a dependency is not
 merged, a command fails for a reason outside the ticket), send
 `BLOCKED: <one sentence>` with what you tried, and stop. Do not work around it.
+
+## Screenshots
+
+Screenshots never go on a feature branch or the default branch. They live on
+a branch `pr-screenshots` that shares no history with the default branch, in
+one folder per ticket, `pr-<n>/` (the ticket's number: the pull request has
+none yet when you capture). Follow the repository's
+`docs/agents/screenshots.md` where it exists. Where it does not, do this and
+add that file and a line in `AGENTS.md` in your pull request:
+
+```sh
+git fetch origin pr-screenshots && git worktree add --detach ../pr-shots FETCH_HEAD
+# first time, when the branch does not exist:
+#   git worktree add --detach ../pr-shots && cd ../pr-shots \
+#     && git checkout --orphan pr-screenshots && git rm -rf . && cd -
+mkdir -p ../pr-shots/pr-<n> && cp <files> ../pr-shots/pr-<n>/
+cd ../pr-shots && git add pr-<n> && git commit -m "Screenshots for #<n>" \
+  && git push origin HEAD:pr-screenshots
+```
+
+Link each image in the pull request by that commit, not by the branch name.
+Your start message is the owner's permission to push to `pr-screenshots`.
+Screens that show personal or financial data are captured on invented data
+only. Nothing from a private repository goes into `escbch/principles`.
 
 ## Messages
 

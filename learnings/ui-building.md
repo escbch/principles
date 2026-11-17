@@ -158,3 +158,24 @@ Talk it through → Decide → Mockup → Small tickets → Check in the real ap
 - Colour as the only carrier of meaning, or values that only show on hover.
 - Screens that recalculate domain numbers.
 - Legends and labels with more detail than the reader needs.
+
+## Accents, long labels and Safari
+
+Learned while settling the open points of the shared UI (2026-11).
+
+- Search a set of accents per theme. Light accents that stay apart collapse
+  when each is only lightened for the dark theme: derive the dark accents
+  from their own search, with lightness as a second way to tell them apart.
+- Check a contrast rule for whether any colour can meet it before using it to
+  judge candidates. "The focus ring has 3 to 1 against the white surface and
+  against the accent" has no solution once the accent itself has 4.5 to 1 on
+  white. A ring drawn 2 px away from the control is judged against the page.
+- With red-green colour blindness, green and berry reds collapse towards the
+  same grey-brown, and blue and violet towards the same blue. Measure the
+  distance of every pair under simulation, not by eye.
+- `hyphens: auto` breaks a long label at a syllable only when `<html lang>`
+  is set. Keep `overflow-wrap: anywhere` beside it as the fallback, so a word
+  without a dictionary entry still cannot overflow.
+- Safari does not focus a button on click. Code that returns focus to "the
+  element that had focus" returns it somewhere else there: remember the
+  button itself when it is pressed, and focus it in code.
