@@ -304,7 +304,7 @@
           <li>Label above the field, hint below it. Field text is 16 px, never smaller (smaller text makes iPhones zoom).</li>
           <li>Optional fields say "(optional)". Everything else is required; there is no star.</li>
           <li>Validation: the button stays enabled. On submit the message appears under its field in the person's words, the field gets a red border, and focus moves to the first wrong field. No browser bubbles, no raw server sentences.</li>
-          <li>Short related fields share a row at every width (amount and unit).</li>
+          <li>Short related fields share one line where the row has room for two fields (two times 9rem and the gap, about 300 px); below that they stack (amount and unit).</li>
           <li>A form that opens in place replaces the button that opened it, scrolls into view and takes focus; closing returns focus to that button.</li>
         </ul>
         <div class="two">
@@ -510,7 +510,7 @@
         <h2>Empty, loading, error</h2>
         <ul class="rules">
           <li>The page keeps its header and navigation in every state.</li>
-          <li><strong>Empty:</strong> what is empty, one sentence on what to do, the add button.</li>
+          <li><strong>Empty:</strong> what is empty, one sentence on what to do, the add button. If the add button stands on the heading line directly above the block, it is not repeated inside.</li>
           <li><strong>Loading:</strong> grey lines in the shape of the content; "Wird geladen …" for screen readers. Old content stays on screen during a reload.</li>
           <li><strong>Load error:</strong> what could not be loaded, what to do, always "Erneut versuchen". The technical detail is small. Never the empty text.</li>
           <li><strong>Not found, not allowed:</strong> the same block with a link to the app's start. No dead ends.</li>
