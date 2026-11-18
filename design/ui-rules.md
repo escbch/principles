@@ -95,6 +95,8 @@ shared pieces.
   text may end after two lines.
 - A row carries at most one visible action. The others open from one "…"
   button named "Weitere Aktionen für <Ding>": editing first, deleting last.
+- A row that shows a text action uses the variant `.row-wrap`; under 900 px
+  the action and "…" stand on a second line.
 - The row menu opens in the page under its row. It closes on Escape (focus
   returns to the "…" button), on a press outside and after an action. One menu
   is open at a time.
