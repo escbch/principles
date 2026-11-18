@@ -30,7 +30,9 @@ handoff, the builder's hand-over message, and the orchestrator's session ID.
    - screens: look at the screenshots on `pr-screenshots` where the builder
      pushed them, before running the app yourself;
    - before raising a rule from a pasted handoff, check which repository the
-     rule belongs to.
+     rule belongs to;
+   - what you could not run or see: name it under `cannot tell` instead of
+     passing it.
 3. **Do not** re-design, restyle or suggest alternatives of taste. Do not
    review code the branch did not change. Do not run the whole app again
    unless a finding depends on it; then check that one thing.

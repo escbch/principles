@@ -202,6 +202,10 @@ what to do, without codes and without "leider".
 - Icons: the inline SVG set in [`icons.svg`](icons.svg) (24 px, stroke 2,
   current colour). No emoji and no Unicode marks as controls.
 - No web fonts, no assets from another origin.
+- An app's installed icon keeps its picture and has the app's accent as its
+  ground. The browser's toolbar colour (`theme-color`) is the top bar's
+  surface colour, one value for light and one for dark
+  (`media="(prefers-color-scheme: dark)"`), never the accent.
 - Every app works in Safari (iPhone, iPad, Mac) as well as in Chrome and
   Firefox. A behaviour that differs there is a defect.
 - A scroll box (table, wide figure) is reachable by keyboard (`tabindex="0"`
