@@ -28,7 +28,7 @@ As a <who>, I want <the slice this package delivers>, so that <why>.
 # Implementation guidance
 
 **<Layer 1, e.g. backend>:**
-- <File or service to add or change, and what it does.>
+- <File or service to add or change, and what it does. Say "new file" for one that does not exist yet.>
 - <Migration: what it does; never edit a merged migration.>
 
 **<Layer 2, e.g. frontend>:**

@@ -32,14 +32,21 @@ request yourself, follow this file instead.
    capture every route the change can reach. In the capture script's lines,
    `axeL=- axeD=-` means axe ran and found nothing; `axe-not-installed` means
    it did not run (`npm ci` in `design/capture` first). After renaming a
-   class, search code and tests for selectors of the old name.
-4. **Hand over for review.** Commit, push the branch, and do **not** open a
-   pull request. Send the orchestrator one message that starts with
+   class, search code and tests for selectors of the old name. Run each new
+   test file alone once and each changed test file ten times in a row: a test
+   that passes only in the full run, or only most of the time, is not done. A
+   test of an order or a limit uses data where the wrong rule gives another
+   answer. A value a person typed (a name, a label, an address) is checked
+   wherever it is used as a path or as syntax.
+4. **Hand over for review.** Commit, push the branch and the screenshots,
+   and do **not** open a pull request. Send the orchestrator one message that starts with
    `READY FOR REVIEW` (format below). Then stop and wait.
 5. **Fix once.** The orchestrator sends the reviewer's findings. Fix every
    `must-fix`, and every `should-fix` you agree with. Do not start a second
    round and do not argue in code: a finding you do not fix goes into the pull
-   request with one line saying why. Re-run the commands that the fixes touch.
+   request with one line saying why. Re-run the commands that the fixes touch,
+   and say for every command of the ticket whether it was re-run or why not:
+   on a stacked branch without CI this is the only proof.
 6. **Open the pull request** against the base branch with
    `.github/pull_request_template.md` where the repository has one: "Closes
    #<n>", deviations, the review's result (fixed, not fixed and why), manual

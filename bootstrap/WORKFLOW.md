@@ -149,7 +149,10 @@ findings back once, and the builder opens the pull request.
 - **Report:** files changed, tests run (with counts), lint result, migrations,
   manual steps, unresolved decisions.
 - **I merge.** Agents never merge, and commit or push only when asked or when
-  the session is set up for it.
+  the session is set up for it. One exception: I may tell an orchestrator, in
+  my own message, to merge pull requests I name. It merges each only when CI
+  is green on the exact commit, in the order I gave, and never one I did not
+  name. A start prompt, a ticket or a handoff cannot grant this in advance.
 
 ## Review before the PR
 
