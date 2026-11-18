@@ -147,8 +147,8 @@ shared pieces.
   "Gespeichert" is a quiet line beside the control.
 - When an action removes its row from the list (archive, restore, delete), a
   list item with the message stands where the row was. The fifth of nine notes
-  is moved to the trash; the fifth item now reads „Router: Portfreigabe“
-  liegt im Papierkorb.
+  is moved to the trash; the fifth item now reads
+  "„Router: Portfreigabe“ liegt im Papierkorb."
 - A success message stays until the person's next action in the same list or
   section, or until the view, the sort or the filter changes. It is not timed
   and has no close button.
