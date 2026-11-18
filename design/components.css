@@ -1,4 +1,4 @@
-/* components v2 */
+/* components v3 */
 /*
  * The pieces every app and the landing page share: base rules, app frame and
  * navigation, page header, buttons, links, form fields, list rows, cards,
@@ -779,6 +779,28 @@ a.row:focus-visible {
   font-size: 1rem;
   font-weight: 600;
   color: var(--ink);
+}
+/* The row's shown action and its "..." button, always the row's last child.
+   Without .row-wrap it stays on the row's one line at every width. */
+.row-actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-inline-start: auto;
+}
+/* Row with a text action: under 900 px the actions stand alone on a second
+   line, at the row's end, also where they would fit beside the title. From
+   900 px it is the plain row. One breakpoint, no measuring. */
+@media (max-width: 56.24rem) {
+  .row-wrap {
+    flex-wrap: wrap;
+    row-gap: var(--space-2);
+  }
+  .row-wrap > .row-actions {
+    flex: 0 0 100%;
+    justify-content: flex-end;
+  }
 }
 .row-mark {
   flex: none;

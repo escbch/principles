@@ -380,6 +380,7 @@
           <li>A list is one box with divider lines. A row: title, at most one muted line, the figure or date at the end.</li>
           <li>A row that leads somewhere is one link: the whole row is the target (at least 56 px high).</li>
           <li>A row shows at most one action; the others are behind "…" (edit first, delete last).</li>
+          <li>A row that shows a text action is <code>.row.row-wrap</code>; its action and "…" sit in <code>.row-actions</code>, the row's last child. Under 900 px they stand on a second line, at the row's end; from 900 px the row is one line. <code>.row-end</code> never holds a button.</li>
           <li>A preview of longer text may end after two lines. A value is never cut.</li>
           <li>Default order by name; items without data last. Tables scroll in their own box, never the page.</li>
         </ul>
@@ -403,6 +404,12 @@
               <li><div class="row"><span class="row-main"><span class="row-title">Haferflocken</span><span class="row-meta">07:20 · 60 g · gewogen</span></span><span class="row-end amount">209 kcal</span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Haferflocken" aria-expanded="true" aria-controls="m-1"><svg class="icon"><use href="#i-more" /></svg></button></div>
                 <ul class="menu" id="m-1"><li><button type="button">Bearbeiten</button></li><li><button type="button">Auf einen anderen Tag verschieben</button></li><li><button type="button" class="menu-danger">Löschen</button></li></ul></li>
               <li><div class="row"><span class="row-main"><span class="row-title">Vollkornbrot mit Sonnenblumen- und Kürbiskernen</span><span class="row-meta">12:40 · 2 Scheiben</span></span><span class="row-end amount">247 kcal</span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Vollkornbrot"><svg class="icon"><use href="#i-more" /></svg></button></div></li>
+            </ul>
+            <span class="demo-label">Rows with a text action: under 900 px the action and "…" take a second line (the first menu is open)</span>
+            <ul class="list">
+              <li><div class="row row-wrap"><span class="row-main"><span class="row-title">Wöchentliche Auswertung der Ernährungsgewohnheiten und Schlafzeiten</span><span class="row-meta">zuletzt am 14.11.</span></span><span class="row-end"><span class="chip">Offen</span></span><span class="row-actions"><button class="btn" type="button">Abschließen</button><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Wöchentliche Auswertung" aria-expanded="true" aria-controls="m-2"><svg class="icon"><use href="#i-more" /></svg></button></span></div>
+                <ul class="menu" id="m-2"><li><button type="button">Bearbeiten</button></li><li><button type="button" class="menu-danger">Löschen</button></li></ul></li>
+              <li><div class="row row-wrap"><span class="row-main"><span class="row-title">Morgenroutine</span><span class="row-meta">täglich</span></span><span class="row-actions"><span class="segmented"><button type="button" aria-pressed="false">Aktivieren</button></span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Morgenroutine"><svg class="icon"><use href="#i-more" /></svg></button></span></div></li>
             </ul>
             <span class="demo-label">Money: name left, amount right, tabular figures</span>
             <ul class="list">
