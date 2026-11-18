@@ -71,14 +71,23 @@ shared pieces.
 - Label above the field, hint below. Field text is 16 px, never smaller
   (smaller text makes iPhones zoom the page on focus).
 - Optional fields say "(optional)". There is no star for required fields.
-- Short related fields share one line at every width (amount and unit).
+- Short related fields share one line where the row has room for two fields
+  (two times 9rem and the gap, about 300 px); below that they stack (amount
+  and unit).
+- The button that submits a form never has the label of the button that
+  opened it. "Eintrag hinzufügen" opens a form; its submit reads "Eintrag
+  speichern".
 - Validation: the submit button stays enabled and the form is `noValidate`.
   On submit the message appears under its field in the person's words, the
   field gets `aria-invalid` and a red border, and focus moves to the first
   wrong field. No browser bubbles, no silently disabled button.
-- The backend answers a refused value with a stable code and the field it
-  belongs to. The sentence is written in the app's message file, in both
-  languages. A server library's own sentence never reaches the screen.
+- The backend answers a refused value with a stable code; it may name the
+  field as well. Where it sends the code only, each form maps its codes to
+  its fields. That map is display knowledge (which input shows a code), not a
+  rule of the domain. The sentence is written in the app's message file, in
+  both languages. A server library's own sentence never reaches the screen.
+  Example: the code `name_too_long` shows its sentence under the field
+  "Name", because the form that has that field says so.
 - A failed save shows under the form's buttons, in the error colours, with
   "Erneut versuchen". What was typed stays.
 - A form that opens in place replaces the button that opened it, scrolls into
@@ -93,11 +102,16 @@ shared pieces.
 - A list is one box with divider lines. A row: title, at most one muted line,
   the figure or date at the end. A figure is never cut; a preview of longer
   text may end after two lines.
+- A row's date stands at the row's end. A date and time that can be a range
+  ("16.11.2026, 07:20 bis 08:00") may stand in the muted line instead,
+  because the row's end does not shrink.
 - A row carries at most one visible action. The others open from one "…"
   button named "Weitere Aktionen für <Ding>": editing first, deleting last.
 - A row that shows a text action uses the variant `.row-wrap`; under 900 px
   the action and "…" stand on a second line.
-- The row menu opens in the page under its row. It closes on Escape (focus
+- The row menu opens in the page under its row, and focus moves to its first
+  entry (Enter on "Weitere Aktionen für Haferflocken" puts focus on
+  "Bearbeiten"). It closes on Escape (focus
   returns to the "…" button), on a press outside and after an action. One menu
   is open at a time.
 - A row that leads somewhere is one link as a whole, at least 56 px high, with
@@ -124,11 +138,22 @@ shared pieces.
   "Wird geladen …" for screen readers. Old content stays during a reload.
 - **Load error:** what could not be loaded, what to do, always "Erneut
   versuchen"; the technical detail small. Never the empty text.
-- **Empty:** what is empty, one sentence on what to do, the add button.
+- **Empty:** what is empty, one sentence on what to do, the add button. If
+  the add button stands on the heading line directly above the block, it is
+  not repeated inside.
 - **Unknown address, not allowed:** the same block with a link to the app's
   start. No dead ends.
 - A message appears where its cause is. No toasts, no bar stuck to the window.
   "Gespeichert" is a quiet line beside the control.
+- When an action removes its row from the list (archive, restore, delete), a
+  list item with the message stands where the row was. The fifth of nine notes
+  is moved to the trash; the fifth item now reads „Router: Portfreigabe“
+  liegt im Papierkorb.
+- A success message stays until the person's next action in the same list or
+  section, or until the view, the sort or the filter changes. It is not timed
+  and has no close button.
+- One message per list or section: a second result replaces the first, also
+  when both are failures.
 - Colour plus a mark plus words; colour is never the only carrier.
 - A part that opens in place always shows that it opens (`.disclosure`).
 
