@@ -53,6 +53,8 @@ handoff, the builder's hand-over message, and the orchestrator's session ID.
 At most 15 findings, most severe first. One finding per problem. Each has a
 place, what is wrong, why it matters, and the change you would make. If you
 are not sure, say so in the finding instead of leaving it out or inflating it.
+A bug that the base branch already has is still a finding: say "already on
+the base" in it, so the orchestrator can decide where it is fixed.
 
 ```text
 REVIEW
