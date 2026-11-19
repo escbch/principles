@@ -21,6 +21,12 @@ and the project handoff. Models: builder `claude-sonnet-5-5`; reviewer
 - Write the plan as a list: ticket, repository, branch
   `feature/<n>-<slug>`, base (the default branch, or the branch it is stacked
   on), depends on.
+- While writing the plan, follow each ticket's blockers to the end, also
+  tickets that are not on the list. Mark every ticket that cannot start
+  because of an open blocker, and say so before the first builder starts.
+- A role file or handoff that the start message names on a branch which no
+  longer exists: check that its pull request was merged, read it from the
+  default branch, and say so in the report.
 
 ## Per ticket
 
@@ -167,6 +173,10 @@ as your final reply.
   builder takes the fix that changes no decided rule, and the question goes
   under **Needs user decision**. When the owner is at hand, such a finding
   pauses the fix round until the answer is there.
+- **A finding that is already on the base** (the reviewer says so): the
+  builder fixes it on its branch when it breaks the ticket's acceptance
+  criteria or the named live check, and says in the pull request that the
+  base had it. Otherwise it goes into the report as a follow-up ticket.
 - **Disk:** remove `node_modules` and `.venv` from a ticket's worktrees once
   its pull request is open.
 
