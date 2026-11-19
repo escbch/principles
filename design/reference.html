@@ -484,7 +484,7 @@
         <ul class="rules">
           <li>A chip states a fact about a row. Its colour carries the state, its text says it: neutral, positive, warning, error, muted (past or cancelled).</li>
           <li>Choosing one of several views or filters: pills in a row. The selected one is tinted with an accent border, never filled, so it cannot be mistaken for the main button.</li>
-          <li>Chips and pills wrap with a gap. A chip never grows wider than its container: one that alone is wider breaks its text inside the chip; one that fits stays as wide as its text.</li>
+          <li>Chips and pills wrap with a gap. A chip stays on one line. One that holds a name a person typed also carries <code>.chip-wrap</code>: it is never wider than its container and may break its text.</li>
         </ul>
         <div class="demo">
           <div class="chip-row">
@@ -494,8 +494,14 @@
             <span class="chip chip-error">Veraltet</span>
             <span class="chip chip-muted">Abgesagt</span>
           </div>
+          <div class="table-box" tabindex="0" role="region" aria-label="Example table with chips">
+            <table class="table">
+              <thead><tr><th>Tag</th><th>Stand</th></tr></thead>
+              <tbody><tr><td>Mittwoch</td><td><span class="chip">Tag nicht vollständig</span></td></tr></tbody>
+            </table>
+          </div>
           <div class="chip-row">
-            <span class="chip">Annemarieschmidtmeierhofstadtlerwohnungsbaugesellschaftmbhxy</span>
+            <span class="chip chip-wrap">Annemarieschmidtmeierhofstadtlerwohnungsbaugesellschaftmbhxy</span>
           </div>
           <div class="segmented" role="group" aria-label="Zeitraum">
             <button type="button" aria-pressed="true">4 Wochen</button>

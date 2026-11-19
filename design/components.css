@@ -928,10 +928,13 @@ a.row:focus-visible {
   color: var(--ink-soft);
   font-size: var(--text-s);
   font-weight: 600;
-  /* A chip that fits stays as wide as its text. One that alone is wider than
-     its container breaks its text inside itself. It never yields to a title. */
-  flex-shrink: 0;
+  white-space: nowrap;
+}
+/* With .chip: a chip that holds a name a person typed. Never wider than its
+   container; its text may break. Every other chip stays on one line. */
+.chip-wrap {
   max-width: 100%;
+  white-space: normal;
   overflow-wrap: anywhere;
 }
 .chip-positive {
