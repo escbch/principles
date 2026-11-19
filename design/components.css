@@ -1,4 +1,4 @@
-/* components v3 */
+/* components v4 */
 /*
  * The pieces every app and the landing page share: base rules, app frame and
  * navigation, page header, buttons, links, form fields, list rows, cards,
@@ -57,6 +57,7 @@ h3 {
   margin: 0;
   line-height: 1.25;
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 h1 {
   font-size: 1.5rem;
@@ -427,7 +428,8 @@ legend {
   justify-content: space-between;
   gap: var(--space-2) var(--space-4);
 }
-.page-header > div {
+.page-header > div,
+.page-header > :is(h1, h2, h3) {
   min-width: 0;
 }
 .page-sub {
@@ -456,6 +458,9 @@ legend {
   justify-content: space-between;
   gap: var(--space-3);
   flex-wrap: wrap;
+}
+.section-head > :is(h1, h2, h3) {
+  min-width: 0;
 }
 
 /* ---------- Buttons ---------- */
@@ -780,6 +785,17 @@ a.row:focus-visible {
   font-weight: 600;
   color: var(--ink);
 }
+/* What belongs to a row but does not fit its line (a text, a "Details" part, a
+   form, a message): a block under the row in the same list item. It has the
+   row's side padding, so it lines up with .row-main; the row's bottom padding
+   is the gap above it. Alone in its item (a message in the place of a row that
+   left) it also has the row's padding above. .menu stays outside it. */
+.row-below {
+  padding: 0 var(--space-4) var(--space-3);
+}
+.list > li > .row-below:first-child {
+  padding-top: var(--space-3);
+}
 /* The row's shown action and its "..." button, always the row's last child.
    Without .row-wrap it stays on the row's one line at every width. */
 .row-actions {
@@ -913,6 +929,13 @@ a.row:focus-visible {
   font-size: var(--text-s);
   font-weight: 600;
   white-space: nowrap;
+}
+/* With .chip: a chip that holds a name a person typed. Never wider than its
+   container; its text may break. Every other chip stays on one line. */
+.chip-wrap {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .chip-positive {
   border-color: transparent;

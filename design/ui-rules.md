@@ -106,7 +106,11 @@ shared pieces.
   ("16.11.2026, 07:20 bis 08:00") may stand in the muted line instead,
   because the row's end does not shrink.
 - A chip at a row's end does not shrink or break; beside it a title may take
-  two lines on a narrow phone.
+  two lines on a narrow phone. A chip that holds a name a person typed
+  carries `.chip-wrap` and may break its text; every other chip stays on one
+  line.
+- What belongs to a row but does not fit its line stands in `.row-below`
+  under it.
 - A row carries at most one visible action. The others open from one "…"
   button named "Weitere Aktionen für <Ding>": editing first, deleting last.
 - A row that shows a text action uses the variant `.row-wrap`; under 900 px

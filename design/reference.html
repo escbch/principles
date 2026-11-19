@@ -262,6 +262,13 @@
             </div>
             <button class="btn btn-primary" type="button">Kochen</button>
           </div>
+          <span class="demo-label">A name of 120 characters without a space breaks inside the heading; the button keeps its size</span>
+          <div class="page-header">
+            <div>
+              <h1>Hähnchenreispfannemitgemüseundkokosmilchundfrischemkoriandersonntagsabendessenfürdiegroßefamilieohnejedeleerzeichenundoh</h1>
+            </div>
+            <button class="btn btn-primary" type="button">Kochen</button>
+          </div>
         </div>
       </section>
 
@@ -381,7 +388,8 @@
           <li>A row that leads somewhere is one link: the whole row is the target (at least 56 px high).</li>
           <li>A row shows at most one action; the others are behind "…" (edit first, delete last).</li>
           <li>A row that shows a text action is <code>.row.row-wrap</code>; its action and "…" sit in <code>.row-actions</code>, the row's last child. Under 900 px they stand on a second line, at the row's end; from 900 px the row is one line. <code>.row-end</code> never holds a button.</li>
-          <li>A preview of longer text may end after two lines. A value is never cut.</li>
+          <li>What belongs to a row but does not fit its line (a text, a part that opens, a form, a message) stands in <code>.row-below</code>, a block under the row in the same list item. It has the row's side padding and lines up with the title. Alone in its item it also has the row's padding above. The row menu stays outside it.</li>
+          <li>A preview of longer text may end after two lines. A value is never cut. A long name without a space breaks inside the row; a chip beside it stays on one line.</li>
           <li>Default order by name; items without data last. Tables scroll in their own box, never the page.</li>
         </ul>
         <div class="two">
@@ -404,6 +412,16 @@
               <li><div class="row"><span class="row-main"><span class="row-title">Haferflocken</span><span class="row-meta">07:20 · 60 g · gewogen</span></span><span class="row-end amount">209 kcal</span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Haferflocken" aria-expanded="true" aria-controls="m-1"><svg class="icon"><use href="#i-more" /></svg></button></div>
                 <ul class="menu" id="m-1"><li><button type="button">Bearbeiten</button></li><li><button type="button">Auf einen anderen Tag verschieben</button></li><li><button type="button" class="menu-danger">Löschen</button></li></ul></li>
               <li><div class="row"><span class="row-main"><span class="row-title">Vollkornbrot mit Sonnenblumen- und Kürbiskernen</span><span class="row-meta">12:40 · 2 Scheiben</span></span><span class="row-end amount">247 kcal</span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Vollkornbrot"><svg class="icon"><use href="#i-more" /></svg></button></div></li>
+            </ul>
+            <span class="demo-label">A block under a row, and one in the place of a row that left</span>
+            <ul class="list">
+              <li><div class="row"><span class="row-main"><span class="row-title">Hotel Seeblick</span><span class="row-meta">3 Nächte · 14.–17.07.</span></span><span class="row-end amount">420 €</span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Hotel Seeblick"><svg class="icon"><use href="#i-more" /></svg></button></div>
+                <div class="row-below"><p class="muted">Frühstück ist inklusive. Check-in ab 15 Uhr, die Rezeption schließt um 22 Uhr.</p></div></li>
+              <li><div class="row-below"><span class="status" role="status"><svg class="icon icon-small"><use href="#i-check" /></svg>Hotel Seeblick gelöscht</span></div></li>
+            </ul>
+            <span class="demo-label">A chip of normal length beside a long title stays on one line; the title takes two</span>
+            <ul class="list">
+              <li><div class="row"><span class="row-main"><span class="row-title">Wöchentliche Schlafauswertung</span></span><span class="row-end"><span class="chip">Offen</span></span></div></li>
             </ul>
             <span class="demo-label">Rows with a text action: under 900 px the action and "…" take a second line (the first menu is open)</span>
             <ul class="list">
@@ -466,7 +484,7 @@
         <ul class="rules">
           <li>A chip states a fact about a row. Its colour carries the state, its text says it: neutral, positive, warning, error, muted (past or cancelled).</li>
           <li>Choosing one of several views or filters: pills in a row. The selected one is tinted with an accent border, never filled, so it cannot be mistaken for the main button.</li>
-          <li>Chips and pills wrap with a gap.</li>
+          <li>Chips and pills wrap with a gap. A chip stays on one line. One that holds a name a person typed also carries <code>.chip-wrap</code>: it is never wider than its container and may break its text.</li>
         </ul>
         <div class="demo">
           <div class="chip-row">
@@ -475,6 +493,15 @@
             <span class="chip chip-warning">Offen</span>
             <span class="chip chip-error">Veraltet</span>
             <span class="chip chip-muted">Abgesagt</span>
+          </div>
+          <div class="table-box" tabindex="0" role="region" aria-label="Example table with chips">
+            <table class="table">
+              <thead><tr><th>Tag</th><th>Stand</th></tr></thead>
+              <tbody><tr><td>Mittwoch</td><td><span class="chip">Tag nicht vollständig</span></td></tr></tbody>
+            </table>
+          </div>
+          <div class="chip-row">
+            <span class="chip chip-wrap">Annemarieschmidtmeierhofstadtlerwohnungsbaugesellschaftmbhxy</span>
           </div>
           <div class="segmented" role="group" aria-label="Zeitraum">
             <button type="button" aria-pressed="true">4 Wochen</button>
