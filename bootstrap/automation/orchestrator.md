@@ -43,7 +43,11 @@ and the project handoff. Models: builder `claude-sonnet-5-5`; reviewer
 6. **Send the review to the builder,** unchanged and in full (decode `&lt;`
    and the like if the transport encoded them), with one line: "Fix once as
    builder.md step 5 says, then open the pull request against <base> and send
-   me `PR <url>`."
+   me `PR <url>`." When the review had two or more `must-fix`, or a fix
+   changes behaviour the ticket defines, ask for `FIXED <sha>` first and
+   start a short second review of the fix commits only (same reviewer model,
+   "review `<sha before>..<sha after>` against these findings"); its findings
+   go to the builder once more, then the pull request opens.
 7. **Wait for** `PR <url>` or `BLOCKED`.
 8. **Confirm the pull request:** it exists, its base is right, it says
    "Closes #<n>", and it lists the review's result. Then **read its CI
@@ -69,9 +73,20 @@ wrong>. Fix the cause on its branch; open no new pull request; never skip or
 weaken a test." Then steps 3 to 9 as for a ticket; in step 6 ask for
 `CI green` instead of a pull request.
 
+## Drafting tickets instead of building
+
+A start message may ask for work packages to be drafted for an app
+([`shaper.md`](shaper.md)). Start one shaping worker on your own model at
+high effort with that file and the start message's scope and decisions, then
+one reviewer of the drafts, then one fix round by the worker. Nothing is
+built from the drafts in the same run unless the owner has labelled them.
+
 ## Start messages
 
-Keep them short; the role file and the project handoff carry the rules. Until
+Keep them short; the role file and the project handoff carry the rules. For
+a ticket that changes screens, name in the reviewer's start message the one
+live check that unit tests prove least (focus after a row leaves, a form that
+opens in place, a reload), and ask the reviewer to do it in the running app. Until
 a file is on its default branch, name the branch it is on.
 
 ```text
@@ -128,7 +143,12 @@ as your final reply.
   branch and start the next one after the previous is merged. Independent
   pull requests that change the same files conflict as soon as one is merged.
 - The owner is away: stack each ticket of a repository on the previous one's
-  branch, and say the merge order first in your report.
+  branch, and say the merge order first in your report. A stack longer than
+  about four is slow to clear: each pull request above the first needs its
+  own round of "merge the default branch in, push, wait for CI".
+- The owner comes back during the run and names pull requests to merge: stop
+  stacking. Clear the stack from the bottom by the merge sequence under
+  "Limits you keep", and base what follows on the default branch.
 - A base that is merged while its ticket is being built: the builder merges
   the default branch in, and the pull request goes against the default branch.
 - A pull request merged while an owner decision is still being built: the
@@ -202,3 +222,6 @@ ticket whose base stopped is skipped.
 Report to the owner: per ticket the pull request or why it stopped; the merge
 order with stacks; every **Needs user decision**; every manual step; what the
 run taught that should change these three files.
+
+Keep your log as a file from the first ticket on, one line per event. Your
+own session can restart, and the report is written from the log.

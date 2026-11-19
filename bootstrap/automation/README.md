@@ -12,6 +12,7 @@ I merge.
 | [`orchestrator.md`](orchestrator.md) | the session I start | the loop, the stop rules, how to wait |
 | [`builder.md`](builder.md) | one session per ticket | build, hand over for review, fix once, open the pull request |
 | [`reviewer.md`](reviewer.md) | one session per ticket | check the branch against the ticket and the standards; findings only |
+| [`shaper.md`](shaper.md) | one worker per app | draft work packages from decided rules, without the label; I read and label |
 
 This differs from [`../WORKFLOW.md`](../WORKFLOW.md) in one point: the builder
 does not run `/code-review` on its own diff. The reviewer session replaces it.
