@@ -52,7 +52,8 @@ As a <who>, I want <the slice this package delivers>, so that <why>.
 - [ ] Says Part of #<map>; links its decisions.
 - [ ] Every rule is exact, with an example and the edge cases.
 - [ ] Implementation guidance names the layers, files or services.
-- [ ] Acceptance criteria are observable, including doc and glossary updates.
+- [ ] Acceptance criteria are observable, including doc and glossary updates,
+      and each can be measured on real data (no number the app cannot meet).
 - [ ] Testing guidelines list the tests and the exact commands.
 - [ ] Out of scope is listed.
 - [ ] An agent could build it without the chat that produced it. -->

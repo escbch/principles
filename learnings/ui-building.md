@@ -179,3 +179,9 @@ Learned while settling the open points of the shared UI (2026-11).
 - Safari does not focus a button on click. Code that returns focus to "the
   element that had focus" returns it somewhere else there: remember the
   button itself when it is pressed, and focus it in code.
+- A loading skeleton with `role="status"` makes a test's
+  `findByRole('status')` resolve on the skeleton instead of the message it
+  waits for. Give the two different names, or query by the text.
+- A criterion with a literal number (a row's height, "no console message")
+  has to be checked against the decided layout and the real data before it
+  goes into a ticket. Four such criteria in one run each cost a decision.
