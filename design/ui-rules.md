@@ -105,6 +105,8 @@ shared pieces.
 - A row's date stands at the row's end. A date and time that can be a range
   ("16.11.2026, 07:20 bis 08:00") may stand in the muted line instead,
   because the row's end does not shrink.
+- A chip at a row's end does not shrink or break; beside it a title may take
+  two lines on a narrow phone.
 - A row carries at most one visible action. The others open from one "…"
   button named "Weitere Aktionen für <Ding>": editing first, deleting last.
 - A row that shows a text action uses the variant `.row-wrap`; under 900 px
