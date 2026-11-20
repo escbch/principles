@@ -90,7 +90,7 @@ where both set the same thing.
 `accents.css` holds one block per app (decided in escbch/site#52 on
 2026-11-17) and two spares. It is not loaded by any page: an app copies its
 block into its `app-tokens.css`. Every group was measured against the token
-values in both themes: at least 4.5 to 1 for accent text on surface, ground
+values in both themes: at least 4.5 to 1 for accent text on surface, raised surface (`--surface-raised`), ground
 and tinted ground and for text on the accent and its hover; at least 3 to 1
 for the focus ring on surface and ground. The six accents in use stay at
 least 7 apart (OKLab distance times 100) with full, green-weak and red-weak

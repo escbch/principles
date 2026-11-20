@@ -1,4 +1,4 @@
-/* accents v1 */
+/* accents v2 */
 /*
  * The accent of every app, as the full token group in light and dark.
  * Decided in escbch/site#52 on 2026-11-17. This file is a source, not a
@@ -131,7 +131,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --accent: #c56ac3;
+    --accent: #c86dc6;
     --accent-hover: #d389d0;
     --on-accent: #220d21;
     --offer-ground: #301e2f;
@@ -140,7 +140,7 @@
   }
 }
 :root[data-theme='dark'] {
-  --accent: #c56ac3;
+  --accent: #c86dc6;
   --accent-hover: #d389d0;
   --on-accent: #220d21;
   --offer-ground: #301e2f;
