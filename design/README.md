@@ -94,6 +94,8 @@ values in both themes: at least 4.5 to 1 for accent text on surface, raised
 surface (`--surface-raised`), ground and tinted ground and for text on the
 accent and its hover; at least 3 to 1 for the focus ring on surface and
 ground. The six accents in use stay at least 7 apart (OKLab distance times
-100) with full, green-weak and red-weak colour vision. A new app takes a
-colour that keeps that distance to every accent in use; a spare replaces
-only the colour named beside it.
+100) with full, green-weak and red-weak colour vision. Colour vision is
+simulated after Machado et al. 2009 at severity 1.0, applied in linear RGB;
+the distance is the OKLab distance times 100. A new app takes a colour that
+keeps that distance to every accent in use; a spare replaces only
+the colour named beside it.
