@@ -1,4 +1,4 @@
-/* components v4 */
+/* components v5 */
 /*
  * The pieces every app and the landing page share: base rules, app frame and
  * navigation, page header, buttons, links, form fields, list rows, cards,
@@ -598,6 +598,27 @@ legend {
   font-weight: 400;
   color: var(--muted);
 }
+/* Fields that answer one question together: fieldset.field-group with a
+   legend. A hint or error for the whole group is its last child. */
+.field-group {
+  min-inline-size: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.field-group > legend {
+  padding: 0;
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.field-group > * + * {
+  margin-top: var(--space-3);
+}
+.field-group > legend + * {
+  margin-top: var(--space-1);
+}
 .hint {
   font-size: var(--text-xs);
   color: var(--muted);
@@ -738,11 +759,33 @@ a.card h3 {
   text-decoration: none;
 }
 /* A row that leads somewhere: the whole row is the link. */
-a.row:hover {
+a.row:hover,
+button.row:hover {
   background: var(--offer-ground);
 }
-a.row:focus-visible {
+a.row:focus-visible,
+button.row:focus-visible {
   outline-offset: -3px;
+}
+/* A row that picks its thing instead of leading somewhere: the whole row is
+   the button, named by its visible text. */
+button.row {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+/* A plain list of facts: sentences that are not things with actions. */
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-wrap: anywhere;
 }
 .row[aria-current] {
   background: var(--offer-ground);
@@ -982,6 +1025,20 @@ a.row:focus-visible {
   text-decoration: none;
   cursor: pointer;
 }
+/* Up to four pills on one line in equal columns; a label that does not fit
+   breaks at a space and the pills share the tallest height. */
+.segmented-equal {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  flex-wrap: nowrap;
+}
+.segmented-equal > * {
+  justify-content: center;
+  padding: var(--space-2);
+  text-align: center;
+  min-width: 0;
+}
 /* Radio inputs inside the labels: the pill is the control. */
 .segmented > label {
   position: relative;
@@ -1155,6 +1212,16 @@ a.row:focus-visible {
 }
 .confirm-question {
   font-weight: 700;
+}
+/* A question that is not a deletion: same order, a neutral border. */
+.confirm-neutral {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-small);
+  background: var(--surface);
 }
 
 /* An overlay only where the person must answer before anything else

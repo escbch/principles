@@ -60,6 +60,9 @@ shared pieces.
   (`.segmented`), never filled. The control takes links, buttons or radio
   inputs inside labels; the stylesheet hides the radio and shows its focus on
   the pill.
+- When up to four options must stay on one line (a short fixed set in a row
+  or above a chart), `.segmented-equal` is used: equal columns, no wrap. Five
+  or more use the plain group, which still wraps.
 - Order: the main action first, "Abbrechen" after it.
 - A disabled button looks disabled, and the reason stands beside it. Prefer an
   enabled button that answers the tap with the reason.
@@ -96,6 +99,8 @@ shared pieces.
   focus a button on click, so "the element that had focus" is not the button
   there.
 - Checkbox and radio: a 20 px box in a 44 px row, one option per line.
+- Fields that answer one question together stand in a `fieldset.field-group`
+  with a `legend`. "(optional)" stands once, on the legend (`.optional`).
 
 ## Lists
 
@@ -123,6 +128,11 @@ shared pieces.
 - A row that leads somewhere is one link as a whole, at least 56 px high, with
   no button inside it. Its accessible name is its whole visible content, not
   the title alone.
+- A row that picks its thing instead of leading somewhere is a `button.row`;
+  its name is its visible text, with no `aria-label`. The line with
+  "Auswählen: Banane" stays for a row that has a second action.
+- Facts that are not things with actions (reasons, lines of a report,
+  sources) are a `.facts` list, never `.list`.
 - The accessible name of a control starts with its visible text
   ("Auswählen: Banane", not "Banane wählen").
 
@@ -133,6 +143,11 @@ shared pieces.
   numbers where there is one), a filled red button that repeats the verb, and
   "Abbrechen". Opening it moves focus to it; "Abbrechen" and Escape return
   focus.
+- A question that is not a deletion uses `.confirm-neutral`: `role="group"`
+  named by its question, the accepting button (`.btn.btn-primary`, never the
+  red one) named after the action ("Wechseln", "Ja, verlängern"), then
+  "Abbrechen", which has focus when it opens. Escape and "Abbrechen" close it
+  and return focus to the button that opened it.
 - What can come back (archive, trash, untick) happens at once.
 - An overlay (native `dialog`) only where the person must answer before
   anything else: leaving unsaved changes, a save conflict.
@@ -155,6 +170,18 @@ shared pieces.
   list item with the message stands where the row was. The fifth of nine notes
   is moved to the trash; the fifth item now reads
   "„Router: Portfreigabe“ liegt im Papierkorb."
+- When a row left its list (archived, restored, deleted, taken off), the
+  message in its place takes no focus. Focus moves to the first that exists:
+  the "…" button of the row after the message (a row without one: its first
+  control); the same for the row before; the add button on the list's heading
+  line; the list's heading (`tabindex="-1"`), or the `summary` of a list
+  inside `<details>`.
+- An action that fails, or after which the row stays, keeps focus on the
+  row's "…" button. The window does not scroll.
+  Example: on Tagebuch the entry „Banane“ is deleted with the keyboard:
+  „Eintrag „Banane“ gelöscht.“ stands where the row was, and focus is on the
+  "…" button of „Haferflocken“, the row after it. Carla archives the last of
+  twelve places: focus is on the "…" button of the eleventh.
 - A success message stays until the person's next action in the same list or
   section, or until the view, the sort or the filter changes. It is not timed
   and has no close button.

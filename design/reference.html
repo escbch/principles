@@ -281,6 +281,7 @@
           <li><strong>Destructive</strong> (red outline): only for what loses data, and it always opens a confirmation. The confirming button is filled red.</li>
           <li>Order: main action first, "Abbrechen" after it. A disabled button looks disabled, and the reason stands beside it.</li>
           <li>A link that stands alone is 44 px high. Small links exist only inside a sentence.</li>
+          <li>Up to four options that must stay on one line: <code>.segmented.segmented-equal</code>, equal columns, no wrap. Five or more use the plain <code>.segmented</code>.</li>
         </ul>
         <div class="demo">
           <div class="btn-row">
@@ -302,6 +303,26 @@
             <a class="back-link" href="#buttons"><svg class="icon icon-small"><use href="#i-back" /></svg>Technik</a>
           </div>
           <p>Ein Link im Satz bleibt klein: Du findest die Angaben im <a href="#buttons">Methodenverlauf</a>.</p>
+          <div style="max-width: 360px">
+          <span class="demo-label">Three pills, one chosen (at 360 px a label may take two lines; its neighbours are as tall)</span>
+          <div class="segmented segmented-equal" role="group" aria-label="Bestand">
+            <button type="button" aria-pressed="true">Vorhanden</button>
+            <button type="button" aria-pressed="false">Wird knapp</button>
+            <button type="button" aria-pressed="false">Aufgebraucht</button>
+          </div>
+          <span class="demo-label">The same as radios</span>
+          <div class="segmented segmented-equal" role="radiogroup" aria-label="Bestand als Auswahl">
+            <label><input type="radio" name="ref-eq" checked />Vorhanden</label>
+            <label><input type="radio" name="ref-eq" />Wird knapp</label>
+            <label><input type="radio" name="ref-eq" />Aufgebraucht</label>
+          </div>
+          <span class="demo-label">A longer label breaks at a space</span>
+          <div class="segmented segmented-equal" role="group" aria-label="Zeitraum lang">
+            <button type="button" aria-pressed="false">Diese Woche</button>
+            <button type="button" aria-pressed="false">Letzte Woche</button>
+            <button type="button" aria-pressed="true">Letzte 4 Wochen</button>
+          </div>
+        </div>
         </div>
       </section>
 
@@ -313,6 +334,7 @@
           <li>Validation: the button stays enabled. On submit the message appears under its field in the person's words, the field gets a red border, and focus moves to the first wrong field. No browser bubbles, no raw server sentences.</li>
           <li>Short related fields share one line where the row has room for two fields (two times 9rem and the gap, about 300 px); below that they stack (amount and unit).</li>
           <li>A form that opens in place replaces the button that opened it, scrolls into view and takes focus; closing returns focus to that button.</li>
+          <li>Fields that answer one question together: <code>fieldset.field-group</code> with a <code>legend</code>; "(optional)" stands once, on the legend.</li>
         </ul>
         <div class="two">
           <form class="demo form measure" onsubmit="return false">
@@ -320,6 +342,29 @@
               <label class="label" for="f-name">Name</label>
               <input class="input" id="f-name" value="Haferflocken" />
             </div>
+            <fieldset class="field-group">
+              <legend>Protein</legend>
+              <div class="field-row">
+                <div class="field">
+                  <label class="label" for="g-min">mindestens (g)</label>
+                  <input class="input" id="g-min" inputmode="decimal" value="60" />
+                </div>
+                <div class="field">
+                  <label class="label" for="g-max">höchstens (g)</label>
+                  <input class="input" id="g-max" inputmode="decimal" value="120" />
+                </div>
+              </div>
+              <p class="hint">Leer lassen, wenn es keine Grenze gibt.</p>
+            </fieldset>
+            <fieldset class="field-group">
+              <legend>Datum auf der Packung <span class="optional">(optional)</span></legend>
+              <div class="field-row">
+                <div class="field"><label class="label" for="g-d">Tag</label><input class="input" id="g-d" inputmode="numeric" /></div>
+                <div class="field"><label class="label" for="g-m">Monat</label><input class="input" id="g-m" inputmode="numeric" /></div>
+                <div class="field"><label class="label" for="g-y">Jahr</label><input class="input" id="g-y" inputmode="numeric" /></div>
+              </div>
+              <p class="hint">Das Mindesthaltbarkeitsdatum steht meist neben dem Strichcode.</p>
+            </fieldset>
             <div class="field-row">
               <div class="field">
                 <label class="label" for="f-amount">Menge</label>
@@ -386,6 +431,7 @@
         <ul class="rules">
           <li>A list is one box with divider lines. A row: title, at most one muted line, the figure or date at the end.</li>
           <li>A row that leads somewhere is one link: the whole row is the target (at least 56 px high).</li>
+          <li>A row that picks its thing instead of leading somewhere is <code>button.row</code>; its name is its visible text. Facts that are not things with actions are a <code>.facts</code> list, never <code>.list</code>.</li>
           <li>A row shows at most one action; the others are behind "…" (edit first, delete last).</li>
           <li>A row that shows a text action is <code>.row.row-wrap</code>; its action and "…" sit in <code>.row-actions</code>, the row's last child. Under 900 px they stand on a second line, at the row's end; from 900 px the row is one line. <code>.row-end</code> never holds a button.</li>
           <li>What belongs to a row but does not fit its line (a text, a part that opens, a form, a message) stands in <code>.row-below</code>, a block under the row in the same list item. It has the row's side padding and lines up with the title. Alone in its item it also has the row's padding above. The row menu stays outside it.</li>
@@ -399,6 +445,18 @@
               <li><a class="row" href="#lists"><svg class="icon row-mark" aria-label="Notiz"><use href="#i-note" /></svg><span class="row-main"><span class="row-title">Router: Portfreigabe</span><span class="row-excerpt">Port 443 an den Rechner im Arbeitszimmer weiterleiten. Vorher dem Rechner im Router eine feste Adresse geben.</span></span><span class="row-end">14.11.</span></a></li>
               <li><a class="row" href="#lists"><svg class="icon row-mark" aria-label="Liste"><use href="#i-list" /></svg><span class="row-main"><span class="row-title">Einkaufsliste</span><span class="row-meta">3 von 9 erledigt</span></span><span class="row-end">12.11.</span></a></li>
               <li><a class="row" href="#lists"><svg class="icon row-mark" aria-label="Lesezeichen"><use href="#i-bookmark" /></svg><span class="row-main"><span class="row-title">Caddy: Reverse Proxy Kurzreferenz</span><span class="row-meta">caddyserver.com</span></span><span class="row-end">09.11.</span></a></li>
+            </ul>
+            <span class="demo-label">Rows that pick their thing (button.row)</span>
+            <ul class="list">
+              <li><button class="row" type="button"><span class="row-main"><span class="row-title">Banane</span><span class="row-meta">89 kcal pro 100 g</span></span></button></li>
+              <li><button class="row" type="button"><span class="row-main"><span class="row-title">Haferflocken</span><span class="row-meta">372 kcal pro 100 g</span></span><span class="row-end"><span class="chip">Vorrat</span></span></button></li>
+              <li><button class="row" type="button"><span class="row-main"><span class="row-title">Naturjoghurt 3,5 %</span><span class="row-meta">64 kcal pro 100 g</span></span></button></li>
+            </ul>
+            <span class="demo-label">A facts list (.facts)</span>
+            <ul class="facts">
+              <li>Das Eiweiß liegt heute unter dem Ziel.</li>
+              <li>Zum Frühstück fehlt noch ein Eintrag.</li>
+              <li>Quelle: Abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz0123456789</li>
             </ul>
             <span class="demo-label">Checkable rows (shopping list)</span>
             <ul class="list">
@@ -567,6 +625,7 @@
         <h2>Confirmation</h2>
         <ul class="rules">
           <li>What cannot come back asks first, in place of the row or under the button: the question names the thing and the consequence; the confirming button repeats the verb.</li>
+          <li>A question that is not a deletion is <code>.confirm.confirm-neutral</code>: the same order, a neutral border, the accepting button <code>.btn-primary</code> named after the action.</li>
           <li>What can come back (archive, trash, untick) happens at once.</li>
           <li>An overlay only when the person must answer before anything else: leaving unsaved changes, a save conflict. It is a native <code>dialog</code>: focus stays inside, Escape cancels.</li>
         </ul>
@@ -575,6 +634,10 @@
             <p class="confirm-question">Regel „Muster Markt“ löschen?</p>
             <p>Die 9 automatisch zugeordneten Umsätze stehen danach wieder unter „Prüfen“. Das lässt sich nicht rückgängig machen.</p>
             <div class="btn-row"><button class="btn btn-danger-solid" type="button">Ja, löschen</button><button class="btn" type="button">Abbrechen</button></div>
+          </div>
+          <div class="confirm confirm-neutral" role="group" aria-label="Zu Zählen wechseln">
+            <p class="confirm-question">Zu „Zählen“ wechseln und dieses Ziel übernehmen?</p>
+            <div class="btn-row"><button class="btn btn-primary" type="button">Wechseln</button><button class="btn" type="button">Abbrechen</button></div>
           </div>
           <dialog class="dialog demo-dialog" open aria-labelledby="d-title">
             <h3 id="d-title">Änderungen verwerfen?</h3>
