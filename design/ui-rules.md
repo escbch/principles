@@ -63,11 +63,11 @@ shared pieces.
 - When up to four options must stay on one line (a short fixed set in a row
   or above a chart), `.segmented-equal` is used: equal columns, no wrap. Five
   or more use the plain group, which still wraps. A label breaks at a space; a
-  single word wider than its pill is hyphenated ("Aufge-braucht"), so a pill
-  may take two lines and its neighbours are as tall. Its corner radius is half
-  the one-line height (22 px), so a two-line pill is a rounded rectangle, not
-  an oval. Hyphenation needs the language: the page's `lang` must be set
-  (`<html lang="de">` for German labels).
+  single word breaks only where the app wrote a soft hyphen (`&shy;`, U+00AD,
+  "Aufge&shy;braucht") and only when it does not fit; the browser then shows
+  a hyphen. A word without one never breaks. A pill may take two lines and
+  its neighbours are as tall. Its corner radius is half the one-line height
+  (22 px), so a two-line pill is a rounded rectangle, not an oval.
 - Order: the main action first, "Abbrechen" after it.
 - A disabled button looks disabled, and the reason stands beside it. Prefer an
   enabled button that answers the tap with the reason.

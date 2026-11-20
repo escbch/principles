@@ -281,7 +281,7 @@
           <li><strong>Destructive</strong> (red outline): only for what loses data, and it always opens a confirmation. The confirming button is filled red.</li>
           <li>Order: main action first, "Abbrechen" after it. A disabled button looks disabled, and the reason stands beside it.</li>
           <li>A link that stands alone is 44 px high. Small links exist only inside a sentence.</li>
-          <li>Up to four options that must stay on one line: <code>.segmented.segmented-equal</code>, equal columns, no wrap. A label breaks at a space; a single word wider than its pill is hyphenated, and the pill's radius is half the one-line height. Hyphenation needs the page's <code>lang</code>. Five or more use the plain <code>.segmented</code>.</li>
+          <li>Up to four options that must stay on one line: <code>.segmented.segmented-equal</code>, equal columns, no wrap. A label breaks at a space; a single word breaks only at a soft hyphen (<code>&amp;shy;</code>) the app writes into it, and the pill's radius is half the one-line height. Five or more use the plain <code>.segmented</code>.</li>
         </ul>
         <div class="demo">
           <div class="btn-row">
@@ -304,17 +304,17 @@
           </div>
           <p>Ein Link im Satz bleibt klein: Du findest die Angaben im <a href="#buttons">Methodenverlauf</a>.</p>
           <div style="max-width: 360px">
-          <span class="demo-label">Three pills, one chosen (at 360 px a label, even a single long word, may take two lines; its neighbours are as tall and the pill is a rounded rectangle)</span>
+          <span class="demo-label">Three pills, one chosen (at 360 px a label may take two lines, a long word at its soft hyphen; its neighbours are as tall and the pill is a rounded rectangle)</span>
           <div class="segmented segmented-equal" role="group" aria-label="Bestand">
             <button type="button" aria-pressed="true">Vorhanden</button>
             <button type="button" aria-pressed="false">Wird knapp</button>
-            <button type="button" aria-pressed="false">Aufgebraucht</button>
+            <button type="button" aria-pressed="false">Aufge&shy;braucht</button>
           </div>
           <span class="demo-label">The same as radios</span>
           <div class="segmented segmented-equal" role="radiogroup" aria-label="Bestand als Auswahl">
             <label><input type="radio" name="ref-eq" checked />Vorhanden</label>
             <label><input type="radio" name="ref-eq" />Wird knapp</label>
-            <label><input type="radio" name="ref-eq" />Aufgebraucht</label>
+            <label><input type="radio" name="ref-eq" />Aufge&shy;braucht</label>
           </div>
           <span class="demo-label">A longer label breaks at a space</span>
           <div class="segmented segmented-equal" role="group" aria-label="Zeitraum lang">

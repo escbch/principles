@@ -1026,9 +1026,8 @@ button.row {
   cursor: pointer;
 }
 /* Up to four pills on one line in equal columns; a label that does not fit
-   breaks at a space, a single word wider than its pill is hyphenated (needs
-   the page's lang), with a break anywhere as the safety net, and the pills
-   share the tallest height. */
+   breaks at a space, a single word breaks only at a soft hyphen (U+00AD) the
+   app writes into the label, and the pills share the tallest height. */
 .segmented-equal {
   display: grid;
   grid-auto-flow: column;
@@ -1040,8 +1039,8 @@ button.row {
   padding: var(--space-2);
   text-align: center;
   min-width: 0;
-  hyphens: auto;
-  overflow-wrap: anywhere;
+  /* Explicit, so an inherited `auto` cannot switch hyphenation on. */
+  hyphens: manual;
   /* Half the one-line pill height (--touch): a one-line pill looks as before,
      a two-line pill is a rounded rectangle, not an oval. */
   border-radius: calc(var(--touch) / 2);
