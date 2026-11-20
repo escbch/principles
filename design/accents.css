@@ -178,29 +178,29 @@
 
 /* ---------- Spare: Raspberry (may replace Plum, never beside it) ---------- */
 :root {
-  --accent: #992e73;
-  --accent-hover: #7f105c;
+  --accent: #b12b70;
+  --accent-hover: #950259;
   --on-accent: #ffffff;
-  --offer-ground: #feeef6;
-  --offer-border: #f3cde1;
+  --offer-ground: #ffeef4;
+  --offer-border: #f5ccdb;
   --focus: #985300;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --accent: #dc6682;
-    --accent-hover: #e7879a;
-    --on-accent: #280b12;
-    --offer-ground: #361d22;
-    --offer-border: #673741;
+    --accent: #f3586f;
+    --accent-hover: #f97d8a;
+    --on-accent: #280b0f;
+    --offer-ground: #361d1f;
+    --offer-border: #68373b;
     --focus: #ffb95c;
   }
 }
 :root[data-theme='dark'] {
-  --accent: #dc6682;
-  --accent-hover: #e7879a;
-  --on-accent: #280b12;
-  --offer-ground: #361d22;
-  --offer-border: #673741;
+  --accent: #f3586f;
+  --accent-hover: #f97d8a;
+  --on-accent: #280b0f;
+  --offer-ground: #361d1f;
+  --offer-border: #68373b;
   --focus: #ffb95c;
 }
 
