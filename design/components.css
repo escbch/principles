@@ -758,7 +758,7 @@ a.card h3 {
   color: var(--ink);
   text-decoration: none;
 }
-/* A row that leads somewhere: the whole row is the link. */
+/* A row that leads somewhere (link) or picks its thing (button): the whole row is the control. */
 a.row:hover,
 button.row:hover {
   background: var(--offer-ground);
@@ -1215,13 +1215,7 @@ button.row {
 }
 /* A question that is not a deletion: same order, a neutral border. */
 .confirm-neutral {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-small);
-  background: var(--surface);
+  border-color: var(--border-strong);
 }
 
 /* An overlay only where the person must answer before anything else
