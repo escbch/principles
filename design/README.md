@@ -95,4 +95,5 @@ surface (`--surface-raised`), ground and tinted ground and for text on the
 accent and its hover; at least 3 to 1 for the focus ring on surface and
 ground. The six accents in use stay at least 7 apart (OKLab distance times
 100) with full, green-weak and red-weak colour vision. A new app takes a
-colour that keeps that distance to every accent in use; a spare replaces only the colour named beside it.
+colour that keeps that distance to every accent in use; a spare replaces
+only the colour named beside it.
