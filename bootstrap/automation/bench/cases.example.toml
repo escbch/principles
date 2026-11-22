@@ -1,0 +1,32 @@
+# Copy this file to a folder OUTSIDE escbch/principles, next to the frozen
+# ticket texts. Tickets of private repositories must not land here.
+
+principles = "~/code/principles"   # a local clone
+principles_commit = "42f660b"             # the role files every run reads
+
+[[case]]
+id = "app-12"                            # short, unique, used in folder names
+repo = "~/code/app"               # a local clone that holds both commits
+base = "<sha the ticket was built on>"    # the first parent of the merge commit
+merged = "<sha of the merge commit>"      # only `hidden` is taken from it
+ticket = "tickets/app-12.md"             # the ticket with its comments, as a file,
+                                          # without the pull request's link or text
+# handoff = "handoffs/app.md"            # optional: the project handoff, as a file
+checks = [                                # the ticket's commands; exit 0 = pass
+  "npm test",
+]
+hidden = []                               # test files of the merged pull request,
+                                          # laid over the builder's branch before
+                                          # `checks` run; the builder never sees them
+# hidden_commit = "<sha>"                  # take `hidden` from here instead of `merged`
+# check_timeout = 900                     # seconds per command
+
+  # Stage 2, optional: a commit a real review found defects in.
+  [[case.review]]
+  id = "prefix"
+  commit = "<sha the builder handed over, before the fix round>"
+  # base = "<sha>"                        # if the branch was older than `base` above
+  # handover = "tickets/app-12.handover.md"   # the READY FOR REVIEW message
+  known = [                               # one line per defect the real review found
+    "The list shows the newest entry last instead of first",
+  ]

@@ -34,6 +34,9 @@ everywhere.
 | Reviewer | `claude-opus-5-5` | medium |
 | Orchestrator | whatever the session runs on; it does little | |
 
+The table is a judgement until it is measured: [`bench/`](bench/) replays
+merged tickets to compare models per role on cost, time and result.
+
 ## Start it
 
 Start one session with the repositories of the tickets attached, and say:
