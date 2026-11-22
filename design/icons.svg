@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Shared icon set (escbch/site#52). 24 px grid, drawn with stroke 2 in the
+  Shared icon set (UI review of 2026-11). 24 px grid, drawn with stroke 2 in the
   current colour: use with class="icon" from components.css.
   Inline: <svg class="icon"><use href="#i-menu" /></svg> with these symbols in the page.
   The reference pages carry an inline copy of this file; change both together.

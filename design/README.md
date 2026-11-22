@@ -17,10 +17,8 @@ What every app and the landing page share, in four parts:
 Each app keeps its accent in its own `app-tokens.css`; the values come from
 `accents.css`.
 
-Apps hold **checked copies** of `tokens.css` and `components.css` (decided in
-[escbch/site#38](https://github.com/escbch/site/issues/38) and
-[escbch/site#52](https://github.com/escbch/site/issues/52)): no package, no
-submodule, no build coupling. Markup and behaviour stay in each app.
+Apps hold **checked copies** of `tokens.css` and `components.css` (decided with the tokens and in the UI review of 2026-11):
+no package, no submodule, no build coupling. Markup and behaviour stay in each app.
 
 ## Changing the tokens or the shared pieces
 
@@ -87,7 +85,7 @@ where both set the same thing.
 
 ## Accents
 
-`accents.css` holds one block per app (decided in escbch/site#52 on
+`accents.css` holds one block per app (decided in the UI review on
 2026-11-17) and two spares. It is not loaded by any page: an app copies its
 block into its `app-tokens.css`. Every group was measured against the token
 values in both themes: at least 4.5 to 1 for accent text on surface, raised

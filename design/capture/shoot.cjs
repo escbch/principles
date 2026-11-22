@@ -1,6 +1,6 @@
 /*
  * Capture and measure the screens of an app, the same way for every app.
- * Used for the UI review of 2026-11 (escbch/site#52) and for the screenshots a
+ * Used for the UI review of 2026-11 and for the screenshots a
  * pull request that changes a screen attaches. See README.md.
  *
  *   const { run } = require('<path>/shoot.cjs')

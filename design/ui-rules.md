@@ -1,8 +1,7 @@
 # Shared UI rules
 
 The rules every app and the landing page follow, beyond the tokens. Decided
-with the owner on 2026-11-16 after a review of all apps
-([escbch/site#52](https://github.com/escbch/site/issues/52)). The picture is
+with the owner on 2026-11-16 after a review of all apps. The picture is
 [`reference.html`](reference.html); the classes are in
 [`components.css`](components.css). This file holds what a stylesheet cannot:
 behaviour, wording, dates and numbers.
