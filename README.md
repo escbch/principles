@@ -32,6 +32,12 @@ your fork from the new project.
 [`bootstrap/WORKFLOW.md`](bootstrap/WORKFLOW.md): user story and map, decisions,
 work packages, implementation, review, and feeding learnings back here.
 
+## Other repositories stay unnamed
+
+This repository is public. A file here says what was decided and when, and
+does not name or link another repository of mine. `sh
+scripts/check-references.sh` fails when one does; CI runs it.
+
 ## License
 
 [MIT](LICENSE): use, copy and adapt freely; keep the copyright notice.

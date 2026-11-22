@@ -1,7 +1,7 @@
 /* accents v2 */
 /*
  * The accent of every app, as the full token group in light and dark.
- * Decided in escbch/site#52 on 2026-11-17. This file is a source, not a
+ * Decided in the UI review on 2026-11-17. This file is a source, not a
  * stylesheet to load: an app copies its block into its app-tokens.css
  * (selectors as in app-tokens.example.css; keep the two dark blocks alike).
  * The focus ring is the same in every app. How the set was measured:

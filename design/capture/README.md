@@ -3,8 +3,7 @@
 One script for "check it in the running app"
 ([`../../learnings/ui-building.md`](../../learnings/ui-building.md), step 4),
 for the screenshots a pull request that changes a screen attaches, and for a
-review across apps. It was written for the UI review of 2026-11
-([escbch/site#52](https://github.com/escbch/site/issues/52)): 5 apps, 502
+review across apps. It was written for the UI review of 2026-11: 5 apps, 502
 screens, all measured alike.
 
 | File | Purpose |

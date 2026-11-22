@@ -46,7 +46,7 @@ Project handoff: <path or issue comment that holds the project's rules>.
 
 ## First run (2026-11-16)
 
-One ticket, escbch/site#54 (a static page: 11 files, about 100 lines changed
+One ticket (a static page: 11 files, about 100 lines changed
 beside two copied files):
 
 | Step | Model | Time | Context used | Cost |

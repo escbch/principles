@@ -1,4 +1,4 @@
-/* components v5 */
+/* components v6 */
 /*
  * The pieces every app and the landing page share: base rules, app frame and
  * navigation, page header, buttons, links, form fields, list rows, cards,
@@ -6,7 +6,7 @@
  *
  * Built only on tokens.css (v2 or later, for --scrim) and the app's
  * app-tokens.css (accent). No colour literal in this file. Decided in
- * escbch/site#52 (2026-11-16); the rules are in ui-rules.md, the picture is
+ * the UI review of 2026-11-16; the rules are in ui-rules.md, the picture is
  * reference.html. Load order: tokens.css, app-tokens.css,
  * components.css, then the app's own CSS.
  *
