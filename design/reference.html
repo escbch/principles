@@ -269,6 +269,12 @@
             </div>
             <button class="btn btn-primary" type="button">Kochen</button>
           </div>
+          <span class="demo-label">A heading that code focuses (<code>tabindex="-1"</code>) shows no ring; a link focused by Tab still does</span>
+          <div class="btn-row">
+            <button class="btn" type="button" onclick="document.getElementById('ref-focus-h').focus()">Focus the heading</button>
+            <a class="link" href="#header">Zu den Rezepten</a>
+          </div>
+          <h2 id="ref-focus-h" tabindex="-1">Rezepte der Woche</h2>
         </div>
       </section>
 
@@ -323,6 +329,34 @@
             <button type="button" aria-pressed="true">Letzte 4 Wochen</button>
           </div>
         </div>
+          <span class="demo-label">Tabs that are pills: the chosen tab carries <code>aria-selected="true"</code> and looks like a chosen pill</span>
+          <div class="segmented" role="tablist" aria-label="Ansicht">
+            <button type="button" role="tab" aria-selected="false" tabindex="-1">Tag</button>
+            <button type="button" role="tab" aria-selected="true">Woche</button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1">Monat</button>
+          </div>
+          <span class="demo-label">Ten one-digit pills: each at least 44 × 44 px, the row wraps</span>
+          <div class="segmented" role="group" aria-label="Bewertung">
+            <button type="button" aria-pressed="false">1</button><button type="button" aria-pressed="false">2</button><button type="button" aria-pressed="true">3</button><button type="button" aria-pressed="false">4</button><button type="button" aria-pressed="false">5</button><button type="button" aria-pressed="false">6</button><button type="button" aria-pressed="false">7</button><button type="button" aria-pressed="false">8</button><button type="button" aria-pressed="false">9</button><button type="button" aria-pressed="false">10</button>
+          </div>
+          <span class="demo-label">Pills that cannot be used: five radios in a disabled fieldset (the chosen one keeps its mark)</span>
+          <fieldset class="field-group" disabled>
+            <legend>Einheit</legend>
+            <div class="segmented" role="radiogroup" aria-label="Einheit gesperrt">
+              <label><input type="radio" name="ref-off" />g</label>
+              <label><input type="radio" name="ref-off" checked />ml</label>
+              <label><input type="radio" name="ref-off" />Stück</label>
+              <label><input type="radio" name="ref-off" />EL</label>
+              <label><input type="radio" name="ref-off" />TL</label>
+            </div>
+          </fieldset>
+          <span class="demo-label">A button pill that cannot be used (<code>:disabled</code>), a chosen one, and one with <code>aria-disabled</code> (it keeps its focus ring on Tab)</span>
+          <div class="segmented" role="group" aria-label="Sperrungen">
+            <button type="button" aria-pressed="false" disabled>Gesperrt</button>
+            <button type="button" aria-pressed="true" disabled>Gewählt</button>
+            <button type="button" aria-pressed="false" aria-disabled="true">Fokussierbar</button>
+            <button type="button" aria-pressed="true" aria-disabled="true">Fokussierbar, gewählt</button>
+          </div>
         </div>
       </section>
 
@@ -365,6 +399,12 @@
               </div>
               <p class="hint">Das Mindesthaltbarkeitsdatum steht meist neben dem Strichcode.</p>
             </fieldset>
+            <span class="demo-label">Three short fields on one line from 360 px (<code>.field-row.field-row-3</code>); one label wraps and the inputs stay level</span>
+            <div class="field-row field-row-3">
+              <div class="field"><label class="label" for="h-h">Stunden</label><input class="input" id="h-h" inputmode="numeric" /></div>
+              <div class="field"><label class="label" for="h-m">Minuten</label><input class="input" id="h-m" inputmode="numeric" /></div>
+              <div class="field"><label class="label" for="h-s">Sekunden der Pause</label><input class="input" id="h-s" inputmode="numeric" /></div>
+            </div>
             <div class="field-row">
               <div class="field">
                 <label class="label" for="f-amount">Menge</label>
@@ -458,6 +498,12 @@
               <li>Zum Frühstück fehlt noch ein Eintrag.</li>
               <li>Quelle: Abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz0123456789</li>
             </ul>
+            <span class="demo-label">A list of label and value (<code>dl.def-list</code>): one under the other below 900 px, side by side from 900 px</span>
+            <dl class="def-list">
+              <div><dt>Kalorien</dt><dd>372 kcal pro 100 g</dd></div>
+              <div><dt>Quelle</dt><dd>Packung, abgeschrieben am 12.11.2026</dd></div>
+              <div><dt>Notiz</dt><dd>Abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz0123456789</dd></div>
+            </dl>
             <span class="demo-label">Checkable rows (shopping list)</span>
             <ul class="list">
               <li><label class="row row-check"><input type="checkbox" id="c-1" /><span class="row-main"><span class="row-title">Naturjoghurt 3,5 %</span></span><span class="row-end">2 Becher</span></label></li>
@@ -475,7 +521,7 @@
             <ul class="list">
               <li><div class="row"><span class="row-main"><span class="row-title">Hotel Seeblick</span><span class="row-meta">3 Nächte · 14.–17.07.</span></span><span class="row-end amount">420 €</span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Hotel Seeblick"><svg class="icon"><use href="#i-more" /></svg></button></div>
                 <div class="row-below"><p class="muted">Frühstück ist inklusive. Check-in ab 15 Uhr, die Rezeption schließt um 22 Uhr.</p></div></li>
-              <li><div class="row-below"><span class="status" role="status"><svg class="icon icon-small"><use href="#i-check" /></svg>Hotel Seeblick gelöscht</span></div></li>
+              <li><div class="row-below"><span class="status" role="status">Hotel Seeblick gelöscht</span></div></li>
             </ul>
             <span class="demo-label">A chip of normal length beside a long title stays on one line; the title takes two</span>
             <ul class="list">
@@ -484,8 +530,12 @@
             <span class="demo-label">Rows with a text action: under 900 px the action and "…" take a second line (the first menu is open)</span>
             <ul class="list">
               <li><div class="row row-wrap"><span class="row-main"><span class="row-title">Wöchentliche Auswertung der Ernährungsgewohnheiten und Schlafzeiten</span><span class="row-meta">zuletzt am 14.11.</span></span><span class="row-end"><span class="chip">Offen</span></span><span class="row-actions"><button class="btn" type="button">Abschließen</button><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Wöchentliche Auswertung" aria-expanded="true" aria-controls="m-2"><svg class="icon"><use href="#i-more" /></svg></button></span></div>
-                <ul class="menu" id="m-2"><li><button type="button">Bearbeiten</button></li><li><button type="button" class="menu-danger">Löschen</button></li></ul></li>
+                <ul class="menu" id="m-2"><li><button type="button">Bearbeiten</button></li><li><button type="button" aria-disabled="true">Teilen (nicht verfügbar)</button></li><li><button type="button" class="menu-danger">Löschen</button></li></ul></li>
               <li><div class="row row-wrap"><span class="row-main"><span class="row-title">Morgenroutine</span><span class="row-meta">täglich</span></span><span class="row-actions"><span class="segmented"><button type="button" aria-pressed="false">Aktivieren</button></span><button class="btn-icon" type="button" aria-label="Weitere Aktionen für Morgenroutine"><svg class="icon"><use href="#i-more" /></svg></button></span></div></li>
+            </ul>
+            <span class="demo-label">A row end that wraps: under 900 px its buttons may take a second line and keep 44 px</span>
+            <ul class="list">
+              <li><div class="row row-wrap"><span class="row-main"><span class="row-title">Wochenplan</span></span><span class="row-actions"><button class="btn" type="button">Duplizieren</button><button class="btn" type="button">Exportieren</button><button class="btn btn-primary" type="button">Abschließen</button></span></div></li>
             </ul>
             <span class="demo-label">Money: name left, amount right, tabular figures</span>
             <ul class="list">
@@ -558,6 +608,11 @@
               <tbody><tr><td>Mittwoch</td><td><span class="chip">Tag nicht vollständig</span></td></tr></tbody>
             </table>
           </div>
+          <span class="demo-label">A chip that is a button: a 44 px target, <code>i-close</code> at its end, named "{label} entfernen"</span>
+          <div class="chip-row">
+            <button class="chip" type="button" aria-label="Vegetarisch entfernen">Vegetarisch<svg class="icon icon-small"><use href="#i-close" /></svg></button>
+            <button class="chip" type="button" aria-label="Ohne Nüsse entfernen">Ohne Nüsse<svg class="icon icon-small"><use href="#i-close" /></svg></button>
+          </div>
           <div class="chip-row">
             <span class="chip chip-wrap">Annemarieschmidtmeierhofstadtlerwohnungsbaugesellschaftmbhxy</span>
           </div>
@@ -587,7 +642,7 @@
           <div class="msg msg-warning"><svg class="icon"><use href="#i-alert" /></svg><div><p><strong>Simulation.</strong> Nichts wird gespeichert.</p><button class="btn" type="button">Beenden</button></div></div>
           <div class="msg msg-positive"><svg class="icon"><use href="#i-check" /></svg><div><p>Der Monat Oktober 2026 ist abgeschlossen.</p></div></div>
           <div class="msg"><svg class="icon"><use href="#i-info" /></svg><div><p>Du kannst nur ansehen: Nur Mitglieder dieser Gruppe ändern etwas.</p></div></div>
-          <span class="status" role="status"><svg class="icon icon-small"><use href="#i-check" /></svg>Gespeichert</span>
+          <span class="status" role="status">Gespeichert</span>
         </div>
       </section>
 
@@ -736,9 +791,29 @@
   document.getElementById('accent').addEventListener('change', (event) => {
     root.setAttribute('data-accent', event.target.value)
   })
-  document.querySelectorAll('.segmented > button').forEach((button) => {
+  document.querySelectorAll('.segmented > button:not([role="tab"])').forEach((button) => {
     button.addEventListener('click', () => {
+      if (button.getAttribute('aria-disabled') === 'true') return
       button.parentElement.querySelectorAll('button').forEach((other) => other.setAttribute('aria-pressed', String(other === button)))
+    })
+  })
+  document.querySelectorAll('[role="tablist"]').forEach((list) => {
+    const tabs = [...list.querySelectorAll('[role="tab"]')]
+    const choose = (tab, focus) => {
+      tabs.forEach((other) => {
+        other.setAttribute('aria-selected', String(other === tab))
+        other.tabIndex = other === tab ? 0 : -1
+      })
+      if (focus) tab.focus()
+    }
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => choose(tab, false))
+      tab.addEventListener('keydown', (event) => {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key]
+        if (!step) return
+        event.preventDefault()
+        choose(tabs[(i + step + tabs.length) % tabs.length], true)
+      })
     })
   })
 </script>

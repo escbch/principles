@@ -1,4 +1,4 @@
-/* components v6 */
+/* components v7 */
 /*
  * The pieces every app and the landing page share: base rules, app frame and
  * navigation, page header, buttons, links, form fields, list rows, cards,
@@ -88,6 +88,10 @@ a:hover {
   color: var(--accent-hover);
 }
 
+/* A heading only code can focus (after a route change) shows no ring. */
+:is(h1, h2, h3)[tabindex='-1']:focus {
+  outline: none;
+}
 :focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
@@ -588,6 +592,14 @@ legend {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
   gap: var(--space-3);
+  /* Level inputs when one label wraps. */
+  align-items: end;
+}
+/* Three short fields (day, month, year) on one line from 360 px. */
+@media (min-width: 22.5rem) {
+  .field-row-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 .label {
   font-size: var(--text-s);
@@ -596,6 +608,13 @@ legend {
 }
 .optional {
   font-weight: 400;
+  color: var(--muted);
+}
+/* Own margin: an app's paragraph rule does not move it. The field's gap and
+   .field-group's spacing (later in this file) set its distance. */
+.hint {
+  margin: 0;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 /* Fields that answer one question together: fieldset.field-group with a
@@ -618,10 +637,6 @@ legend {
 }
 .field-group > legend + * {
   margin-top: var(--space-1);
-}
-.hint {
-  font-size: var(--text-xs);
-  color: var(--muted);
 }
 .input,
 .select,
@@ -777,6 +792,31 @@ button.row {
   text-align: start;
   cursor: pointer;
 }
+/* A list of label and value: <dl class="def-list">. One per line under
+   900 px, side by side from 900 px. */
+.def-list {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+.def-list > div {
+  min-width: 0;
+}
+.def-list dt {
+  font-size: var(--text-s);
+  color: var(--muted);
+}
+.def-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 56.25rem) {
+  .def-list > div {
+    display: grid;
+    grid-template-columns: minmax(8rem, 12rem) 1fr;
+    gap: var(--space-3);
+  }
+}
 /* A plain list of facts: sentences that are not things with actions. */
 .facts {
   display: flex;
@@ -858,6 +898,7 @@ button.row {
   }
   .row-wrap > .row-actions {
     flex: 0 0 100%;
+    flex-wrap: wrap;
     justify-content: flex-end;
   }
 }
@@ -914,6 +955,14 @@ button.row {
 .menu > li > button:hover,
 .menu > li > a:hover {
   background: var(--offer-ground);
+}
+.menu > li > :is(button, a)[aria-disabled='true'] {
+  background: var(--divider);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.menu > li > :is(button, a)[aria-disabled='true']:hover {
+  background: var(--divider);
 }
 .menu > li > .menu-danger {
   color: var(--error-ink);
@@ -1000,10 +1049,36 @@ button.row {
   color: var(--muted);
   font-weight: 400;
 }
+/* A chip that is a button (it removes something). The 44 px target is a
+   pseudo-element, so the chip keeps its size. Its name is its text plus the
+   action ("Remove {label}"); the shared i-close stands at its end. */
+button.chip {
+  position: relative;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+button.chip::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, var(--touch));
+  height: var(--touch);
+  transform: translate(-50%, -50%);
+}
+button.chip:hover {
+  border-color: var(--border-strong);
+}
 .chip-row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+}
+/* Chips that are buttons: a row gap of touch height minus chip height, so the
+   44 px targets of wrapped rows do not overlap. */
+.chip-row:has(> button.chip) {
+  row-gap: calc(var(--touch) - 1.6875rem);
 }
 
 /* One of several views or filters. Selected is tinted, never filled. */
@@ -1015,6 +1090,9 @@ button.row {
 .segmented > * {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  /* A one-character pill (a digit) is still a 44 x 44 px target. */
+  min-width: var(--touch);
   min-height: var(--touch);
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--border-strong);
@@ -1063,11 +1141,28 @@ button.row {
   outline-offset: 2px;
 }
 .segmented > [aria-pressed='true'],
+.segmented > [aria-selected='true'],
 .segmented > [aria-current],
 .segmented > :has(input:checked) {
   border-color: var(--accent);
   background: var(--offer-ground);
   color: var(--accent);
+}
+/* A pill that cannot be used looks like .btn:disabled, chosen or not. A chosen
+   one keeps a mark: a 2 px border instead of 1 px. An aria-disabled pill stays
+   focusable and keeps its focus ring. */
+.segmented > :is(:disabled, [aria-disabled='true']),
+.segmented > label:has(input:disabled) {
+  border-color: var(--border);
+  background: var(--divider);
+  color: var(--muted);
+  cursor: not-allowed;
+  filter: none;
+}
+.segmented > :is(:disabled, [aria-disabled='true']):is([aria-pressed='true'], [aria-selected='true'], [aria-current]),
+.segmented > label:has(input:disabled:checked) {
+  border-color: var(--muted);
+  box-shadow: inset 0 0 0 1px var(--muted);
 }
 
 /* ---------- Disclosure: a section that opens in place ---------- */
@@ -1143,6 +1238,17 @@ button.row {
   font-size: var(--text-s);
   font-weight: 600;
   color: var(--positive-ink);
+}
+/* The check mark is drawn here: no icon in the markup. */
+.status::before {
+  content: '';
+  flex: none;
+  width: 0.35rem;
+  height: 0.7rem;
+  margin-inline: 0.2rem 0.15rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-10%) rotate(45deg);
 }
 
 /* ---------- Empty, loading, error ---------- */
