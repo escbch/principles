@@ -59,6 +59,13 @@ shared pieces.
   (`.segmented`), never filled. The control takes links, buttons or radio
   inputs inside labels; the stylesheet hides the radio and shows its focus on
   the pill.
+- A view switch made of tabs (`role="tablist"`, tabs that are pills) marks the
+  chosen tab with `aria-selected`; it looks like a chosen pill. A pill is at
+  least 44 px wide, so a one-digit pill is a 44 × 44 px target.
+- A pill that cannot be used looks like a disabled button (`:disabled`,
+  `aria-disabled="true"`, or a radio disabled by itself or by its fieldset),
+  chosen or not; a chosen one keeps a darker 2 px border. A pill with
+  `aria-disabled` stays focusable and keeps its focus ring.
 - When up to four options must stay on one line (a short fixed set in a row
   or above a chart), `.segmented-equal` is used: equal columns, no wrap. Five
   or more use the plain group, which still wraps. A label breaks at a space; a
@@ -68,6 +75,9 @@ shared pieces.
   its neighbours are as tall. Its corner radius is half the one-line height
   (22 px), so a two-line pill is a rounded rectangle, not an oval.
 - Order: the main action first, "Abbrechen" after it.
+- A chip that removes something is a `button.chip` with the shared `i-close`
+  at its end. Its name is its visible text plus the action ("Remove {label}").
+  Its touch target is 44 px; the chip keeps its size.
 - A disabled button looks disabled, and the reason stands beside it. Prefer an
   enabled button that answers the tap with the reason.
 - A link that stands alone is 44 px high (`.link`, `.back-link`). Small links
@@ -80,7 +90,10 @@ shared pieces.
 - Optional fields say "(optional)". There is no star for required fields.
 - Short related fields share one line where the row has room for two fields
   (two times 9rem and the gap, about 300 px); below that they stack (amount
-  and unit).
+  and unit). Three short fields (day, month, year) take one line from 360 px
+  with `.field-row-3` on the row. Inputs of one row share one baseline, also
+  when a label wraps.
+- A hint has its own margin (0); an app's paragraph rule does not move it.
 - The button that submits a form never has the label of the button that
   opened it. "Eintrag hinzufügen" opens a form; its submit reads "Eintrag
   speichern".
@@ -140,6 +153,14 @@ shared pieces.
 - The accessible name of a control starts with its visible text
   ("Auswählen: Banane", not "Banane wählen").
 
+- A list of label and value is a `dl.def-list`: the label in small muted
+  text, the value in body text; one under the other below 900 px, side by
+  side from 900 px.
+- An entry of a row menu that cannot be used has `aria-disabled="true"`: muted
+  text, no hover, still focusable.
+- Under 900 px the end of a `.row-wrap` (`.row-actions`) may wrap onto a second
+  line; its buttons keep 44 px.
+
 ## Deleting
 
 - What cannot come back asks first, in place of the row or under the button:
@@ -193,6 +214,8 @@ shared pieces.
   when both are failures.
 - Colour plus a mark plus words; colour is never the only carrier.
 - A part that opens in place always shows that it opens (`.disclosure`).
+
+- `.status` draws its own check mark; the markup holds the text only.
 
 ## Language and theme
 
@@ -262,7 +285,8 @@ what to do, without codes and without "leider".
   own CSS. Base rules must come before feature rules, in the source and in the
   built file.
 - Focus ring: 3 px solid `--focus`, offset 2 px. No outline on a heading that
-  only receives focus for screen readers.
+  only receives focus for screen readers
+  (`:is(h1, h2, h3)[tabindex='-1']:focus`).
 - Icons: the inline SVG set in [`icons.svg`](icons.svg) (24 px, stroke 2,
   current colour). No emoji and no Unicode marks as controls.
 - No web fonts, no assets from another origin.
