@@ -6,7 +6,9 @@
  *   cd design/capture && npm ci && node run.reference.cjs        # another
  *
  * Every line of the output must read overflow412=false, small=0/…, axeL=-,
- * axeD=-, focusMissing=0 (or -), ext=0, console=0.
+ * axeD=-, focusMissing=0 (or -), ext=0, console=0. One known exception: the
+ * screens "reference" and "reference-blue" read small=2/… because the 44 px
+ * target of button.chip is a pseudo-element, which the script does not count.
  */
 const path = require('node:path')
 const { run } = require('./shoot.cjs')

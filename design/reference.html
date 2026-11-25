@@ -608,10 +608,10 @@
               <tbody><tr><td>Mittwoch</td><td><span class="chip">Tag nicht vollständig</span></td></tr></tbody>
             </table>
           </div>
-          <span class="demo-label">A chip that is a button: a 44 px target, <code>i-close</code> at its end, named "Remove {label}"</span>
+          <span class="demo-label">A chip that is a button: a 44 px target, <code>i-close</code> at its end, named "{label} entfernen"</span>
           <div class="chip-row">
-            <button class="chip" type="button" aria-label="Remove Vegetarisch">Vegetarisch<svg class="icon icon-small"><use href="#i-close" /></svg></button>
-            <button class="chip" type="button" aria-label="Remove Ohne Nüsse">Ohne Nüsse<svg class="icon icon-small"><use href="#i-close" /></svg></button>
+            <button class="chip" type="button" aria-label="Vegetarisch entfernen">Vegetarisch<svg class="icon icon-small"><use href="#i-close" /></svg></button>
+            <button class="chip" type="button" aria-label="Ohne Nüsse entfernen">Ohne Nüsse<svg class="icon icon-small"><use href="#i-close" /></svg></button>
           </div>
           <div class="chip-row">
             <span class="chip chip-wrap">Annemarieschmidtmeierhofstadtlerwohnungsbaugesellschaftmbhxy</span>
@@ -791,10 +791,29 @@
   document.getElementById('accent').addEventListener('change', (event) => {
     root.setAttribute('data-accent', event.target.value)
   })
-  document.querySelectorAll('.segmented > button').forEach((button) => {
+  document.querySelectorAll('.segmented > button:not([role="tab"])').forEach((button) => {
     button.addEventListener('click', () => {
       if (button.getAttribute('aria-disabled') === 'true') return
       button.parentElement.querySelectorAll('button').forEach((other) => other.setAttribute('aria-pressed', String(other === button)))
+    })
+  })
+  document.querySelectorAll('[role="tablist"]').forEach((list) => {
+    const tabs = [...list.querySelectorAll('[role="tab"]')]
+    const choose = (tab, focus) => {
+      tabs.forEach((other) => {
+        other.setAttribute('aria-selected', String(other === tab))
+        other.tabIndex = other === tab ? 0 : -1
+      })
+      if (focus) tab.focus()
+    }
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => choose(tab, false))
+      tab.addEventListener('keydown', (event) => {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key]
+        if (!step) return
+        event.preventDefault()
+        choose(tabs[(i + step + tabs.length) % tabs.length], true)
+      })
     })
   })
 </script>

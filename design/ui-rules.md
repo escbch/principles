@@ -64,7 +64,7 @@ shared pieces.
   least 44 px wide, so a one-digit pill is a 44 × 44 px target.
 - A pill that cannot be used looks like a disabled button (`:disabled`,
   `aria-disabled="true"`, or a radio disabled by itself or by its fieldset),
-  chosen or not; a chosen one keeps a darker 2 px border. A pill with
+  chosen or not; a chosen one keeps a 2 px border in the muted colour. A pill with
   `aria-disabled` stays focusable and keeps its focus ring.
 - When up to four options must stay on one line (a short fixed set in a row
   or above a chart), `.segmented-equal` is used: equal columns, no wrap. Five
@@ -76,8 +76,9 @@ shared pieces.
   (22 px), so a two-line pill is a rounded rectangle, not an oval.
 - Order: the main action first, "Abbrechen" after it.
 - A chip that removes something is a `button.chip` with the shared `i-close`
-  at its end. Its name is its visible text plus the action ("Remove {label}").
-  Its touch target is 44 px; the chip keeps its size.
+  at its end. Its name is its visible text plus the action ("{label} entfernen").
+  Its touch target is 44 px; the chip keeps its size. A row of such chips has
+  a row gap, so that no two targets overlap.
 - A disabled button looks disabled, and the reason stands beside it. Prefer an
   enabled button that answers the tap with the reason.
 - A link that stands alone is 44 px high (`.link`, `.back-link`). Small links
@@ -137,11 +138,16 @@ shared pieces.
   button named "Weitere Aktionen für <Ding>": editing first, deleting last.
 - A row that shows a text action uses the variant `.row-wrap`; under 900 px
   the action and "…" stand on a second line.
+- Under 900 px the end of a `.row-wrap` (`.row-actions`) may wrap onto a second
+  line; its buttons keep 44 px.
 - The row menu opens in the page under its row, and focus moves to its first
   entry (Enter on "Weitere Aktionen für Haferflocken" puts focus on
   "Bearbeiten"). It closes on Escape (focus
   returns to the "…" button), on a press outside and after an action. One menu
   is open at a time.
+- An entry of a row menu that cannot be used has `aria-disabled="true"`: the
+  look of a disabled button (muted text, `--divider` ground), no hover, still
+  focusable.
 - A row that leads somewhere is one link as a whole, at least 56 px high, with
   no button inside it. Its accessible name is its whole visible content, not
   the title alone.
@@ -150,16 +156,11 @@ shared pieces.
   "Auswählen: Banane" stays for a row that has a second action.
 - Facts that are not things with actions (reasons, lines of a report,
   sources) are a `.facts` list, never `.list`.
-- The accessible name of a control starts with its visible text
-  ("Auswählen: Banane", not "Banane wählen").
-
 - A list of label and value is a `dl.def-list`: the label in small muted
   text, the value in body text; one under the other below 900 px, side by
   side from 900 px.
-- An entry of a row menu that cannot be used has `aria-disabled="true"`: muted
-  text, no hover, still focusable.
-- Under 900 px the end of a `.row-wrap` (`.row-actions`) may wrap onto a second
-  line; its buttons keep 44 px.
+- The accessible name of a control starts with its visible text
+  ("Auswählen: Banane", not "Banane wählen").
 
 ## Deleting
 
@@ -190,7 +191,8 @@ shared pieces.
 - **Unknown address, not allowed:** the same block with a link to the app's
   start. No dead ends.
 - A message appears where its cause is. No toasts, no bar stuck to the window.
-  "Gespeichert" is a quiet line beside the control.
+  "Gespeichert" is a quiet line beside the control (`.status`); it draws its
+  own check mark, the markup holds the text only.
 - When an action removes its row from the list (archive, restore, delete), a
   list item with the message stands where the row was. The fifth of nine notes
   is moved to the trash; the fifth item now reads
@@ -214,8 +216,6 @@ shared pieces.
   when both are failures.
 - Colour plus a mark plus words; colour is never the only carrier.
 - A part that opens in place always shows that it opens (`.disclosure`).
-
-- `.status` draws its own check mark; the markup holds the text only.
 
 ## Language and theme
 

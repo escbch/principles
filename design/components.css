@@ -957,9 +957,12 @@ button.row {
   background: var(--offer-ground);
 }
 .menu > li > :is(button, a)[aria-disabled='true'] {
-  background: none;
+  background: var(--divider);
   color: var(--muted);
   cursor: not-allowed;
+}
+.menu > li > :is(button, a)[aria-disabled='true']:hover {
+  background: var(--divider);
 }
 .menu > li > .menu-danger {
   color: var(--error-ink);
@@ -1071,6 +1074,11 @@ button.chip:hover {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+}
+/* Chips that are buttons: a row gap of touch height minus chip height, so the
+   44 px targets of wrapped rows do not overlap. */
+.chip-row:has(> button.chip) {
+  row-gap: calc(var(--touch) - 1.6875rem);
 }
 
 /* One of several views or filters. Selected is tinted, never filled. */
